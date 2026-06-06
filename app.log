@@ -1,0 +1,20 @@
+2025-12-09 16:21:42,551 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-12-09 16:21:42,551 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-12-09 16:21:42,551 - werkzeug - INFO -  * Restarting with stat
+2025-12-09 16:21:43,409 - werkzeug - WARNING -  * Debugger is active!
+2025-12-09 16:21:43,415 - werkzeug - INFO -  * Debugger PIN: 179-248-864
+2025-12-09 16:22:40,616 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:40] "GET / HTTP/1.1" 200 -
+2025-12-09 16:22:40,769 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:40] "[33mGET /static/img/img1.jpg HTTP/1.1[0m" 404 -
+2025-12-09 16:22:42,120 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:42] "[32mGET /auth HTTP/1.1[0m" 302 -
+2025-12-09 16:22:42,455 - __main__ - ERROR - Database connection error: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-12-09 16:22:42,604 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:42] "[35m[1mGET /home HTTP/1.1[0m" 500 -
+2025-12-09 16:22:43,278 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:43] "GET /home?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-12-09 16:22:43,286 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:43] "GET /home?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-12-09 16:22:43,336 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:43] "GET /home?__debugger__=yes&cmd=resource&f=console.png&s=LYT9I1Z3z1JWgIykJZvv HTTP/1.1" 200 -
+2025-12-09 16:22:43,668 - werkzeug - INFO - 127.0.0.1 - - [09/Dec/2025 16:22:43] "GET /home?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-12-09 16:32:30,909 - werkzeug - INFO -  * Detected change in 'C:\\Users\\mrphd\\cinesoul\\app.py', reloading
+2025-12-09 16:32:30,988 - werkzeug - INFO -  * Restarting with stat
+2025-12-09 16:33:49,302 - werkzeug - INFO -  * Restarting with stat
+2025-12-09 16:36:36,250 - werkzeug - INFO -  * Restarting with stat
+2025-12-09 16:40:45,536 - werkzeug - INFO -  * Restarting with stat

@@ -1,0 +1,3300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineSoul - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0a0a16;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== BACKGROUND EFFECTS ========== */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #ff2a6d;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: #05d9e8;
+            top: 60%;
+            left: 70%;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: #d1f7ff;
+            top: 30%;
+            left: 80%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(40px, -60px) rotate(120deg); }
+            66% { transform: translate(-30px, 30px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(5, 217, 232, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .search-btn {
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            opacity: 0.9;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            padding: 120px 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* ========== WELCOME SECTION ========== */
+        .welcome-section {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(5, 217, 232, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-text h2 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            color: #8a8fa3;
+            font-size: 1.1rem;
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #05d9e8;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #8a8fa3;
+        }
+
+        /* ========== QUOTE SECTION ========== */
+        .quote-section {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(10, 25, 47, 0.5);
+            border-radius: 15px;
+            border-left: 4px solid #ff2a6d;
+            border-right: 4px solid #05d9e8;
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #d1f7ff;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            color: #8a8fa3;
+            font-size: 1rem;
+        }
+
+        /* ========== MOOD SELECTOR ========== */
+        .mood-selector {
+            margin-bottom: 3rem;
+        }
+
+        .mood-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .mood-title h3 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .mood-title p {
+            color: #8a8fa3;
+            font-size: 1.1rem;
+        }
+
+        .mood-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .mood-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .mood-btn:hover {
+            transform: translateY(-3px);
+            border-color: rgba(5, 217, 232, 0.5);
+            box-shadow: 0 5px 15px rgba(5, 217, 232, 0.2);
+        }
+
+        .mood-btn.active {
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            border-color: transparent;
+            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.3);
+        }
+
+        /* ========== MOVIE SECTIONS ========== */
+        .movie-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: #05d9e8;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .movie-card {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(5, 217, 232, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover .movie-poster {
+            transform: scale(1.05);
+        }
+
+        .movie-info {
+            padding: 1rem;
+        }
+
+        .movie-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-details {
+            display: flex;
+            justify-content: space-between;
+            color: #8a8fa3;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .movie-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .action-btn:hover {
+            background: rgba(5, 217, 232, 0.2);
+            border-color: rgba(5, 217, 232, 0.5);
+        }
+
+        .watchlist-btn.active {
+            background: rgba(255, 42, 109, 0.2);
+            border-color: rgba(255, 42, 109, 0.5);
+            color: #ff2a6d;
+        }
+
+        /* ========== TV SHOWS SECTION ========== */
+        .tv-show-card {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .tv-show-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 42, 109, 0.5);
+            box-shadow: 0 10px 25px rgba(255, 42, 109, 0.2);
+        }
+
+        .tv-show-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .tv-show-info {
+            padding: 1rem;
+        }
+
+        .tv-show-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        /* ========== ENHANCED CHATBOT ========== */
+        .chatbot-toggle {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Chatbot Modal */
+        .chatbot-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chatbot-content {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 80vh;
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chatbot-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-title {
+            font-size: 1.5rem;
+            color: #05d9e8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-chatbot {
+            background: none;
+            border: none;
+            color: #8a8fa3;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-chatbot:hover {
+            color: #ff2a6d;
+        }
+
+        .chatbot-body {
+            padding: 1.5rem;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 400px;
+        }
+
+        .chat-message {
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            max-width: 85%;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background: rgba(5, 217, 232, 0.1);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            align-self: flex-start;
+            color: #d1f7ff;
+        }
+
+        .user-message {
+            background: rgba(255, 42, 109, 0.1);
+            border: 1px solid rgba(255, 42, 109, 0.3);
+            align-self: flex-end;
+            color: #fff;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            border-radius: 25px;
+            padding: 0.8rem 1.5rem;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-input input:focus {
+            outline: none;
+            border-color: #05d9e8;
+        }
+
+        .send-btn {
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .voice-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8a8fa3;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .voice-btn:hover {
+            background: rgba(255, 42, 109, 0.1);
+            color: #ff2a6d;
+        }
+
+        .voice-btn.listening {
+            background: rgba(255, 42, 109, 0.3);
+            color: #ff2a6d;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 42, 109, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 42, 109, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 42, 109, 0); }
+        }
+
+        /* Quick Suggestions */
+        .quick-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .suggestion-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8a8fa3;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-btn:hover {
+            background: rgba(5, 217, 232, 0.1);
+            border-color: rgba(5, 217, 232, 0.3);
+            color: #05d9e8;
+        }
+
+        /* Movie Suggestions in Chat */
+        .movie-suggestions {
+            margin-top: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
+        }
+
+        .movie-suggestion-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .movie-suggestion-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(5, 217, 232, 0.5) !important;
+            box-shadow: 0 5px 15px rgba(5, 217, 232, 0.2);
+        }
+
+        .typing-indicator {
+            padding: 10px;
+            background: rgba(5, 217, 232, 0.1);
+            border-radius: 15px;
+            align-self: flex-start;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #05d9e8;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        /* ========== MODALS ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #05d9e8;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #8a8fa3;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ff2a6d;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        /* ========== SUPPORT FEEDBACK POPUP ========== */
+        .feedback-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 300px;
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 1002;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .feedback-popup h4 {
+            color: #05d9e8;
+            margin-bottom: 1rem;
+        }
+
+        .feedback-popup textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            border-radius: 10px;
+            padding: 0.8rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .feedback-popup textarea:focus {
+            outline: none;
+            border-color: #05d9e8;
+        }
+
+        .feedback-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(5, 217, 232, 0.3);
+            padding: 3rem 2rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            padding: 1rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section p {
+            color: #8a8fa3;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+            color: #8a8fa3;
+        }
+
+        .footer-section ul li a {
+            color: #8a8fa3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #05d9e8;
+        }
+
+        .footer-section ul li i {
+            margin-right: 10px;
+            color: #05d9e8;
+            width: 20px;
+            text-align: center;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8a8fa3;
+            font-size: 0.9rem;
+        }
+
+        .copyright p:first-child {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ========== LOADING & EMPTY STATES ========== */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            grid-column: 1/-1;
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            border: 3px solid transparent;
+            border-top: 3px solid #05d9e8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .no-movies {
+            text-align: center;
+            padding: 3rem;
+            grid-column: 1/-1;
+            color: #8a8fa3;
+        }
+
+        .no-movies i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #05d9e8;
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+            
+            .search-container {
+                order: 3;
+                margin: 1rem 0 0;
+                max-width: 100%;
+            }
+            
+            .main-content {
+                padding: 160px 1rem 1rem;
+            }
+            
+            .welcome-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .user-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .mood-buttons {
+                gap: 0.5rem;
+            }
+            
+            .mood-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.9rem;
+                min-width: 120px;
+            }
+            
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            .feedback-popup {
+                width: calc(100% - 40px);
+                right: 20px;
+                left: 20px;
+            }
+            
+            .chatbot-content {
+                max-width: 95%;
+            }
+            
+            .footer {
+                padding: 2rem 1rem 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .welcome-text h2 {
+                font-size: 2rem;
+            }
+            
+            .user-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .movies-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .mood-btn {
+                min-width: 100px;
+                padding: 0.5rem 1rem;
+            }
+            
+            .footer-section h4 {
+                font-size: 1.2rem;
+            }
+            
+            .chatbot-content {
+                max-width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+            }
+        }
+
+        /* ========== UTILITY CLASSES ========== */
+        .mood-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(5, 217, 232, 0.1);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            z-index: 10000;
+            max-width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/home" style="text-decoration: none;">
+                <h1>CineSoul</h1>
+            </a>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="search-input" placeholder="Search movies, year, actor, mood, genre..." aria-label="Search movies">
+                <button class="search-btn" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic" id="profile-pic" onclick="toggleProfileModal()">U</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-header">
+                <div class="welcome-text">
+                    <h2>Welcome back, <span id="user-name">User</span>!</h2>
+                    <p id="mood-preference-text">Ready to discover movies that match your current vibe? 🎬</p>
+                    <div id="mood-analysis-summary" style="margin-top: 10px; display: none;">
+                        <span style="color: #05d9e8; font-size: 0.9rem;">
+                            <i class="fas fa-brain"></i> Based on your viewing history, we've personalized recommendations for you
+                        </span>
+                    </div>
+                </div>
+                <div class="user-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="movies-watched">0</div>
+                        <div class="stat-label">Movies Watched</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="watchlist-count">0</div>
+                        <div class="stat-label">In Watchlist</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="moods-tracked">0</div>
+                        <div class="stat-label">Moods Tracked</div>
+                    </div>
+                </div>
+            </div>
+            <div id="mood-insights" style="margin-top: 15px; padding: 10px; background: rgba(5, 217, 232, 0.1); border-radius: 10px; display: none;">
+                <h4 style="color: #05d9e8; margin-bottom: 5px; font-size: 0.9rem;">
+                    <i class="fas fa-chart-line"></i> Your Mood Insights
+                </h4>
+                <div id="insights-content" style="color: #8a8fa3; font-size: 0.85rem;">
+                    Loading your viewing patterns...
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <div class="quote">
+                "The cinema is not a slice of life, it's a piece of cake." - Alfred Hitchcock
+            </div>
+            <div class="quote-author">
+                Pick your mood below and let's find your perfect movie slice!
+            </div>
+        </section>
+
+        <!-- Enhanced Mood Selector -->
+        <section class="mood-selector">
+            <div class="mood-title">
+                <h3>How are you feeling today?</h3>
+                <p>Select your mood to get personalized recommendations</p>
+                <div id="mood-suggestions" style="margin-top: 10px; font-size: 0.9rem; color: #8a8fa3;">
+                    <i class="fas fa-lightbulb"></i> Based on your history, you might like: 
+                    <span id="suggested-moods"></span>
+                </div>
+            </div>
+            <div class="mood-buttons">
+                <button class="mood-btn active" data-mood="all" data-description="All genres mixed">
+                    <i class="fas fa-globe"></i> All
+                </button>
+                <button class="mood-btn" data-mood="happy" data-description="Comedy, Animation, Music">
+                    <i class="fas fa-smile"></i> Happy
+                </button>
+                <button class="mood-btn" data-mood="sad" data-description="Drama, Romance, Mystery">
+                    <i class="fas fa-sad-tear"></i> Sad
+                </button>
+                <button class="mood-btn" data-mood="angry" data-description="Action, Crime, War">
+                    <i class="fas fa-angry"></i> Angry
+                </button>
+                <button class="mood-btn" data-mood="romantic" data-description="Romance, Comedy, Drama">
+                    <i class="fas fa-heart"></i> Romantic
+                </button>
+                <button class="mood-btn" data-mood="adventurous" data-description="Adventure, Fantasy, History">
+                    <i class="fas fa-hiking"></i> Adventurous
+                </button>
+                <button class="mood-btn" data-mood="inspired" data-description="Sci-Fi, Documentary, History">
+                    <i class="fas fa-lightbulb"></i> Inspired
+                </button>
+                <button class="mood-btn" data-mood="horror" data-description="Horror, Thriller, Mystery">
+                    <i class="fas fa-ghost"></i> Horror
+                </button>
+            </div>
+            <div id="mood-description" style="text-align: center; margin-top: 10px; color: #8a8fa3; font-size: 0.9rem;">
+                Select a mood to see genre details
+            </div>
+        </section>
+
+        <!-- Personalized For You -->
+        <section class="movie-section">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-user-check"></i> 
+                    <span id="personalized-title">Personalized For You</span>
+                    <span id="current-mood-indicator" class="mood-indicator" style="display: none;">
+                        <span id="mood-display">mood</span>
+                    </span>
+                </h3>
+                <button class="action-btn" id="refresh-personalized" style="font-size: 0.8rem;">
+                    <i class="fas fa-redo"></i> Refresh
+                </button>
+            </div>
+            <div id="personalization-explanation" style="margin-bottom: 15px; padding: 10px; background: rgba(255, 42, 109, 0.1); border-radius: 10px; display: none;">
+                <span style="color: #ff2a6d; font-size: 0.85rem;">
+                    <i class="fas fa-magic"></i> These recommendations are based on: 
+                    <span id="personalization-factors">your mood and viewing history</span>
+                </span>
+            </div>
+            <div class="movies-grid" id="personalized-movies">
+                <div class="loading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TV Shows Section -->
+        <section class="movie-section">
+            <div class="section-header">
+                <h3 class="section-title"><i class="fas fa-tv"></i> Popular TV Shows</h3>
+            </div>
+            <div class="movies-grid" id="tv-shows">
+                <div class="loading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending Now -->
+        <section class="movie-section">
+            <div class="section-header">
+                <h3 class="section-title"><i class="fas fa-fire"></i> Trending Now</h3>
+            </div>
+            <div class="movies-grid" id="trending-movies">
+                <div class="loading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Releases -->
+        <section class="movie-section">
+            <div class="section-header">
+                <h3 class="section-title"><i class="fas fa-calendar-star"></i> New Releases</h3>
+            </div>
+            <div class="movies-grid" id="new-movies">
+                <div class="loading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Your Watchlist -->
+        <section class="movie-section">
+            <div class="section-header">
+                <h3 class="section-title"><i class="fas fa-bookmark"></i> Your Watchlist</h3>
+            </div>
+            <div class="movies-grid" id="watchlist-movies">
+                <div class="loading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Floating Chatbot -->
+    <div class="chatbot-toggle" id="chatbot-toggle">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Enhanced Chatbot Modal -->
+    <div class="chatbot-modal" id="chatbot-modal">
+        <div class="chatbot-content">
+            <div class="chatbot-header">
+                <h3 class="chatbot-title">
+                    <i class="fas fa-robot"></i> CineSoul Assistant
+                </h3>
+                <button class="close-chatbot" onclick="toggleChatbot()" aria-label="Close chatbot">&times;</button>
+            </div>
+            <div class="chatbot-body" id="chatbot-body">
+                <div class="chat-message bot-message">
+                    Hi! I'm your CineSoul assistant. I can help you find movies by:
+                    <div class="quick-suggestions" style="margin-top: 10px;">
+                        <button class="suggestion-btn" onclick="sendSuggestion('action movies from 2023')">Action 2023</button>
+                        <button class="suggestion-btn" onclick="sendSuggestion('romantic comedy')">Romantic Comedy</button>
+                        <button class="suggestion-btn" onclick="sendSuggestion('scary horror movies')">Horror Movies</button>
+                        <button class="suggestion-btn" onclick="sendSuggestion('inspiring documentaries')">Inspirational</button>
+                    </div>
+                    <div id="recent-searches" style="margin-top: 10px; font-size: 0.8rem; color: #8a8fa3;"></div>
+                    <div style="margin-top: 10px; font-size: 0.8rem; color: #8a8fa3;">
+                        Try: "action movies from 2023", "romantic comedy", "scary movies", etc.
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <button class="voice-btn" id="voice-btn" title="Voice search">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <input type="text" id="chatbot-input" placeholder="Type your movie request..." 
+                       onkeypress="handleChatbotKeyPress(event)"
+                       aria-label="Chat with CineSoul Assistant">
+                <button class="send-btn" onclick="sendChatbotMessage()" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Popup -->
+    <div class="feedback-popup hidden" id="feedback-popup">
+        <h4>Give us your feedback!</h4>
+        <textarea id="feedback-text" placeholder="What do you think about CineSoul?"></textarea>
+        <div class="feedback-buttons">
+            <button class="action-btn" onclick="hideFeedbackPopup()">Cancel</button>
+            <button class="action-btn" style="background: linear-gradient(45deg, #ff2a6d, #05d9e8); color: white; border: none;" onclick="submitFeedback()">
+                Submit
+            </button>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profile-modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Profile & Preferences</h3>
+                <button class="close-modal" onclick="toggleProfileModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="profile-pic" style="width: 80px; height: 80px; margin: 0 auto 1rem; font-size: 2rem;">
+                        U
+                    </div>
+                    <h3 id="profile-name">User Name</h3>
+                    <p id="profile-email" style="color: #8a8fa3;">user@example.com</p>
+                </div>
+                
+                <!-- Mood Preferences -->
+                <div style="margin-bottom: 1.5rem; padding: 15px; background: rgba(5, 217, 232, 0.1); border-radius: 10px;">
+                    <h4 style="color: #05d9e8; margin-bottom: 10px; font-size: 1rem;">
+                        <i class="fas fa-heartbeat"></i> Your Mood Profile
+                    </h4>
+                    <div id="mood-profile-stats">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Most Common Mood:</span>
+                            <span id="most-common-mood">None</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Favorite Genre:</span>
+                            <span id="favorite-genre">None</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Mood Accuracy:</span>
+                            <span id="mood-accuracy">0%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span>Movies Watched</span>
+                        <span id="profile-watched">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span>Watchlist</span>
+                        <span id="profile-watchlist">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Account Created</span>
+                        <span id="profile-created">2024-01-01</span>
+                    </div>
+                </div>
+                
+                <button class="action-btn" style="width: 100%; background: linear-gradient(45deg, #ff2a6d, #05d9e8); color: white; border: none;" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout to Welcome Page
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>CineSoul</h4>
+                <p>Dreams and anguish bring us together 💙</p>
+                <p>Find movies that match your vibe ❤️</p>
+                <p>Your personal movie recommendation platform</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" onclick="showFeedbackPopup()"><i class="fas fa-comment"></i> Feedback</a></li>
+                    <li><a href="#" onclick="showFeedbackPopup()"><i class="fas fa-bug"></i> Report Issue</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@cinesoul.com</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Chennai, India</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 CineSoul. All rights reserved. Made with ❤️ for movie lovers like you everywhere.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Powered by TMDB API • Data from The Movie Database</p>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script>
+        // ========== CONFIGURATION ==========
+        const TMDB_API_KEYS = [
+            "5db7a6a7dbb93e9e885307f0f84fb0ef",
+            "b9b8d9a7dbb93e9e885307f0f84fb1ab",
+            "c0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5"
+        ];
+        let currentApiKeyIndex = 0;
+        
+        const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+        const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+        const FALLBACK_IMAGE = "https://via.placeholder.com/200x300/0a0a16/ffffff?text=Movie";
+
+        // ========== ENHANCED MOOD MAPPING ==========
+        const moodConfig = {
+            'happy': {
+                genres: [35, 16, 10402],
+                colors: ['#FFD700', '#FF6B6B'],
+                description: 'Light-hearted comedies and feel-good films',
+                keywords: ['comedy', 'happy', 'uplifting', 'funny']
+            },
+            'sad': {
+                genres: [18, 10749, 9648],
+                colors: ['#6C5CE7', '#0984E3'],
+                description: 'Emotional dramas and heartfelt stories',
+                keywords: ['drama', 'emotional', 'tearjerker', 'melancholic']
+            },
+            'angry': {
+                genres: [28, 80, 10752],
+                colors: ['#D63031', '#E17055'],
+                description: 'Intense action and gripping thrillers',
+                keywords: ['action', 'thriller', 'violent', 'intense']
+            },
+            'romantic': {
+                genres: [10749, 35, 18],
+                colors: ['#E84393', '#FD79A8'],
+                description: 'Heartwarming love stories',
+                keywords: ['romance', 'love', 'relationship', 'passion']
+            },
+            'adventurous': {
+                genres: [12, 14, 36],
+                colors: ['#00B894', '#00CEC9'],
+                description: 'Exciting adventures and epic journeys',
+                keywords: ['adventure', 'fantasy', 'epic', 'journey']
+            },
+            'inspired': {
+                genres: [878, 99, 36],
+                colors: ['#74B9FF', '#A29BFE'],
+                description: 'Thought-provoking and educational films',
+                keywords: ['inspirational', 'educational', 'thought-provoking', 'documentary']
+            },
+            'horror': {
+                genres: [27, 53, 9648],
+                colors: ['#2D3436', '#636E72'],
+                description: 'Scary and suspenseful horror films',
+                keywords: ['horror', 'scary', 'terror', 'suspense']
+            },
+            'all': {
+                genres: [],
+                colors: ['#FF2A6D', '#05D9E8'],
+                description: 'Mixed genres for all tastes',
+                keywords: ['mixed', 'popular', 'trending']
+            }
+        };
+
+        const moodDisplayNames = {
+            'happy': '😊 Happy',
+            'sad': '😢 Sad',
+            'angry': '😠 Angry',
+            'romantic': '❤️ Romantic',
+            'adventurous': '🏞️ Adventurous',
+            'inspired': '💡 Inspired',
+            'horror': '👻 Horror',
+            'all': '🌍 All'
+        };
+
+        // Genre names mapping
+        const genreNames = {
+            28: 'Action', 12: 'Adventure', 16: 'Animation', 35: 'Comedy',
+            80: 'Crime', 99: 'Documentary', 18: 'Drama', 10751: 'Family',
+            14: 'Fantasy', 36: 'History', 27: 'Horror', 10402: 'Music',
+            9648: 'Mystery', 10749: 'Romance', 878: 'Science Fiction',
+            10770: 'TV Movie', 53: 'Thriller', 10752: 'War', 37: 'Western'
+        };
+
+        // ========== GLOBAL VARIABLES ==========
+        let currentUser = null;
+        let currentMood = 'all';
+        let watchlist = [];
+        let moodHistory = [];
+        let searchHistory = [];
+        let userProfile = {
+            preferredGenres: [],
+            dislikedGenres: [],
+            favoriteActors: [],
+            favoriteDirectors: [],
+            moodPatterns: {},
+            viewingHistory: [],
+            moodAccuracy: 0
+        };
+        let allMovies = [];
+        let movieCache = new Map();
+        let conversationContext = {
+            lastSearch: null,
+            preferences: {},
+            suggestionsGiven: []
+        };
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('DOM Loaded - Initializing CineSoul...');
+            
+            // Check authentication
+            const userData = localStorage.getItem('currentUser');
+            if (!userData) {
+                window.location.href = '/login';
+                return;
+            }
+            
+            try {
+                currentUser = JSON.parse(userData);
+                console.log('User loaded:', currentUser.username);
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+                window.location.href = '/login';
+                return;
+            }
+
+            // Initialize user
+            initializeUser();
+            
+            // Load user data
+            loadUserData();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Setup enhanced chatbot
+            setupEnhancedChatbot();
+            
+            // Setup accessibility
+            setupAccessibility();
+            
+            // Load all content
+            await loadAllContent();
+            
+            // Update UI
+            updateUI();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification(`Welcome back ${currentUser.name || currentUser.username}! We've personalized content for you.`, 'success');
+            }, 1000);
+        });
+
+        // ========== USER MANAGEMENT ==========
+        function initializeUser() {
+            if (!currentUser) return;
+            
+            document.getElementById('user-name').textContent = currentUser.name || currentUser.username;
+            
+            const initials = getInitials(currentUser.name || currentUser.username);
+            document.getElementById('profile-pic').textContent = initials;
+            document.querySelector('#profile-modal .profile-pic').textContent = initials;
+            
+            document.getElementById('profile-name').textContent = currentUser.name || currentUser.username;
+            document.getElementById('profile-email').textContent = currentUser.email || 'user@example.com';
+            document.getElementById('profile-created').textContent = 
+                currentUser.created_at ? currentUser.created_at.split('T')[0] : '2024-01-01';
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        function loadUserData() {
+            // Load from localStorage
+            const savedData = localStorage.getItem(`cineSoulData_${currentUser.username}`);
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    watchlist = data.watchlist || [];
+                    moodHistory = data.moodHistory || [];
+                    searchHistory = data.searchHistory || [];
+                    userProfile = data.userProfile || userProfile;
+                    conversationContext = data.conversationContext || conversationContext;
+                    
+                    console.log('User data loaded:', { 
+                        watchlistCount: watchlist.length,
+                        moodHistoryCount: moodHistory.length 
+                    });
+                } catch (e) {
+                    console.error('Error loading user data:', e);
+                }
+            }
+            
+            updateStats();
+            updateMoodSuggestions();
+            updateMoodInsights();
+            updateRecentSearches();
+        }
+
+        function saveUserData() {
+            const data = {
+                watchlist: watchlist,
+                moodHistory: moodHistory,
+                searchHistory: searchHistory,
+                userProfile: userProfile,
+                conversationContext: conversationContext,
+                lastUpdated: new Date().toISOString()
+            };
+            
+            localStorage.setItem(`cineSoulData_${currentUser.username}`, JSON.stringify(data));
+            console.log('User data saved');
+        }
+
+        // ========== ENHANCED MOOD ANALYSIS ==========
+        function analyzeUserMoodPatterns() {
+            const patterns = {
+                frequentMoods: {},
+                timeBasedMoods: {},
+                genrePreferences: {},
+                ratingPatterns: []
+            };
+            
+            // Analyze mood history
+            moodHistory.forEach(entry => {
+                patterns.frequentMoods[entry.mood] = (patterns.frequentMoods[entry.mood] || 0) + 1;
+                
+                const hour = new Date(entry.timestamp).getHours();
+                const timeOfDay = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
+                patterns.timeBasedMoods[timeOfDay] = patterns.timeBasedMoods[timeOfDay] || {};
+                patterns.timeBasedMoods[timeOfDay][entry.mood] = (patterns.timeBasedMoods[timeOfDay][entry.mood] || 0) + 1;
+            });
+            
+            // Analyze viewing history
+            userProfile.viewingHistory.forEach(view => {
+                if (view.genres) {
+                    view.genres.forEach(genre => {
+                        patterns.genrePreferences[genre] = (patterns.genrePreferences[genre] || 0) + 1;
+                    });
+                }
+                if (view.rating) {
+                    patterns.ratingPatterns.push(view.rating);
+                }
+            });
+            
+            return patterns;
+        }
+
+        function getSuggestedMoods() {
+            const patterns = analyzeUserMoodPatterns();
+            const frequentMoods = Object.entries(patterns.frequentMoods)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 3)
+                .map(entry => entry[0]);
+            
+            return frequentMoods.length > 0 ? frequentMoods : ['happy', 'adventurous', 'romantic'];
+        }
+
+        function updateMoodSuggestions() {
+            const suggestedMoods = getSuggestedMoods();
+            const suggestionsElement = document.getElementById('suggested-moods');
+            
+            if (suggestedMoods.length > 0) {
+                suggestionsElement.innerHTML = suggestedMoods
+                    .map(mood => `<span style="color: ${moodConfig[mood].colors[0]}; font-weight: 600;">${moodDisplayNames[mood]}</span>`)
+                    .join(', ');
+            } else {
+                suggestionsElement.innerHTML = '<span style="color: #05d9e8;">Try different moods to get personalized suggestions!</span>';
+            }
+        }
+
+        function updateMoodInsights() {
+            const patterns = analyzeUserMoodPatterns();
+            const insightsElement = document.getElementById('insights-content');
+            const insightsContainer = document.getElementById('mood-insights');
+            
+            if (Object.keys(patterns.frequentMoods).length > 0) {
+                insightsContainer.style.display = 'block';
+                
+                const mostCommonMood = Object.entries(patterns.frequentMoods)
+                    .sort((a, b) => b[1] - a[1])[0];
+                
+                const hour = new Date().getHours();
+                const timeOfDay = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
+                const timeBasedMood = patterns.timeBasedMoods[timeOfDay] 
+                    ? Object.entries(patterns.timeBasedMoods[timeOfDay]).sort((a, b) => b[1] - a[1])[0]
+                    : null;
+                
+                let insightsHTML = '';
+                
+                if (mostCommonMood) {
+                    insightsHTML += `Your most common mood is <strong style="color: ${moodConfig[mostCommonMood[0]].colors[0]}">${moodDisplayNames[mostCommonMood[0]]}</strong>`;
+                }
+                
+                if (timeBasedMood) {
+                    insightsHTML += ` • In the ${timeOfDay}, you usually prefer <strong style="color: ${moodConfig[timeBasedMood[0]].colors[0]}">${moodDisplayNames[timeBasedMood[0]]}</strong> movies`;
+                }
+                
+                insightsElement.innerHTML = insightsHTML;
+            } else {
+                insightsContainer.style.display = 'none';
+            }
+        }
+
+        // ========== ENHANCED CONTENT LOADING ==========
+        async function loadAllContent() {
+            showLoadingStates();
+            
+            try {
+                // Load in sequence
+                await loadPersonalizedMovies();
+                await loadTVShows();
+                await loadTrendingMovies();
+                await loadNewMovies();
+                
+                updateWatchlistDisplay();
+                updateMoodAnalysisSummary();
+                
+                console.log('All content loaded successfully');
+                
+            } catch (error) {
+                console.error('Error loading content:', error);
+                showErrorMessages();
+            }
+        }
+
+        async function loadPersonalizedMovies() {
+            const section = document.getElementById('personalized-movies');
+            
+            try {
+                // For now, use mood-based movies
+                const movies = await getMoodBasedMovies(currentMood, 8);
+                
+                if (movies.length > 0) {
+                    // Enrich movie data
+                    const enrichedMovies = await Promise.all(
+                        movies.slice(0, 8).map(movie => enrichMovieData(movie, currentMood))
+                    );
+                    
+                    displayMovieSection('personalized-movies', enrichedMovies);
+                    updatePersonalizationExplanation();
+                } else {
+                    showFallbackContent('personalized-movies', 'personalized');
+                }
+                
+            } catch (error) {
+                console.error('Error in loadPersonalizedMovies:', error);
+                showFallbackContent('personalized-movies', 'personalized');
+            }
+        }
+
+        async function getMoodBasedMovies(mood, count = 8) {
+            try {
+                console.log(`Loading ${mood} movies...`);
+                const config = moodConfig[mood];
+                let url = '';
+                
+                if (mood === 'all') {
+                    url = `${TMDB_BASE_URL}/movie/popular?api_key=${getCurrentApiKey()}&language=en-US&page=1`;
+                } else if (config.genres.length > 0) {
+                    url = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}` +
+                         `&language=en-US&with_genres=${config.genres.join(',')}` +
+                         `&sort_by=popularity.desc&page=1`;
+                } else {
+                    url = `${TMDB_BASE_URL}/movie/popular?api_key=${getCurrentApiKey()}&language=en-US&page=1`;
+                }
+                
+                console.log('Fetching from:', url);
+                const response = await fetchWithRetry(url);
+                const data = await response.json();
+                
+                console.log(`Got ${data.results?.length || 0} movies for ${mood}`);
+                return data.results || [];
+                
+            } catch (error) {
+                console.error(`Error getting ${mood} movies:`, error);
+                return [];
+            }
+        }
+
+        // ========== ENHANCED API HELPER FUNCTIONS ==========
+        function getCurrentApiKey() {
+            return TMDB_API_KEYS[currentApiKeyIndex];
+        }
+
+        async function fetchWithRetry(url, retries = 3) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url);
+                    
+                    if (response.status === 429) { // Rate limited
+                        currentApiKeyIndex = (currentApiKeyIndex + 1) % TMDB_API_KEYS.length;
+                        url = url.replace(/api_key=[^&]+/, `api_key=${getCurrentApiKey()}`);
+                        await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+                        continue;
+                    }
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    return response;
+                    
+                } catch (error) {
+                    console.error(`Fetch attempt ${i + 1} failed:`, error);
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+                }
+            }
+        }
+
+        async function getCachedMovie(movieId) {
+            if (movieCache.has(movieId)) {
+                return movieCache.get(movieId);
+            }
+            
+            try {
+                const movie = await enrichMovieData({ id: movieId });
+                movieCache.set(movieId, movie);
+                
+                // Limit cache size
+                if (movieCache.size > 100) {
+                    const firstKey = movieCache.keys().next().value;
+                    movieCache.delete(firstKey);
+                }
+                
+                return movie;
+            } catch (error) {
+                console.error('Error getting cached movie:', error);
+                return null;
+            }
+        }
+
+        async function enrichMovieData(movie, mood = null) {
+            try {
+                // Check cache first
+                if (movieCache.has(movie.id)) {
+                    return movieCache.get(movie.id);
+                }
+                
+                // Basic movie info
+                const enriched = {
+                    id: movie.id,
+                    title: movie.title || movie.name,
+                    year: movie.release_date ? movie.release_date.split('-')[0] : 
+                          movie.first_air_date ? movie.first_air_date.split('-')[0] : 'N/A',
+                    rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                    poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : FALLBACK_IMAGE,
+                    overview: movie.overview || 'No overview available.',
+                    genres: (movie.genre_ids || []).map(id => genreNames[id] || 'Unknown'),
+                    mood: mood || detectMoodFromMovie(movie),
+                    popularity: movie.popularity || 0,
+                    vote_count: movie.vote_count || 0
+                };
+                
+                // Try to get additional details
+                try {
+                    if (movie.id) {
+                        const detailsUrl = `${TMDB_BASE_URL}/movie/${movie.id}?api_key=${getCurrentApiKey()}&append_to_response=credits`;
+                        const detailsResponse = await fetch(detailsUrl);
+                        const details = await detailsResponse.json();
+                        
+                        enriched.runtime = details.runtime || 'N/A';
+                        enriched.directors = details.credits?.crew?.filter(p => p.job === 'Director').map(p => p.name) || [];
+                        enriched.cast = details.credits?.cast?.slice(0, 3).map(p => ({ 
+                            name: p.name, 
+                            character: p.character 
+                        })) || [];
+                    }
+                    
+                } catch (detailsError) {
+                    console.warn(`Could not fetch details for movie ${movie.id}:`, detailsError);
+                }
+                
+                // Cache the enriched movie
+                movieCache.set(movie.id, enriched);
+                
+                return enriched;
+                
+            } catch (error) {
+                console.error('Error enriching movie data:', error);
+                return {
+                    id: movie.id || Date.now(),
+                    title: movie.title || 'Unknown Movie',
+                    year: 'N/A',
+                    rating: 'N/A',
+                    poster: FALLBACK_IMAGE,
+                    overview: 'No information available.',
+                    genres: [],
+                    mood: 'all'
+                };
+            }
+        }
+
+        function detectMoodFromMovie(movie) {
+            if (!movie.genre_ids) return 'all';
+            
+            const genreMoodMap = {
+                35: 'happy', 16: 'happy', 10402: 'happy',
+                18: 'sad', 10749: 'sad', 9648: 'sad',
+                28: 'angry', 80: 'angry', 10752: 'angry',
+                10749: 'romantic', 35: 'romantic', 18: 'romantic',
+                12: 'adventurous', 14: 'adventurous', 36: 'adventurous',
+                878: 'inspired', 99: 'inspired', 36: 'inspired',
+                27: 'horror', 53: 'horror', 9648: 'horror'
+            };
+            
+            const moodScores = {};
+            movie.genre_ids.forEach(genreId => {
+                const mood = genreMoodMap[genreId];
+                if (mood) {
+                    moodScores[mood] = (moodScores[mood] || 0) + 1;
+                }
+            });
+            
+            if (Object.keys(moodScores).length === 0) return 'all';
+            
+            return Object.entries(moodScores)
+                .sort((a, b) => b[1] - a[1])[0][0];
+        }
+
+        // ========== DISPLAY FUNCTIONS ==========
+        function displayMovieSection(sectionId, movies) {
+            const section = document.getElementById(sectionId);
+            
+            if (!movies || movies.length === 0) {
+                showFallbackContent(sectionId, sectionId.replace('-movies', '').replace('-', ' '));
+                return;
+            }
+            
+            section.innerHTML = '';
+            
+            movies.forEach(movie => {
+                const card = createMovieCard(movie);
+                section.appendChild(card);
+            });
+            
+            // Store movies for later use
+            allMovies = [...allMovies, ...movies];
+        }
+
+        function createMovieCard(movie) {
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+            card.setAttribute('data-movie-id', movie.id);
+            
+            const isInWatchlist = watchlist.some(m => m.id === movie.id);
+            const moodColor = moodConfig[movie.mood]?.colors[0] || '#05d9e8';
+            
+            card.innerHTML = `
+                <div style="position: relative;">
+                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster" 
+                         onerror="this.src='${FALLBACK_IMAGE}'">
+                    <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 8px; border-radius: 5px; font-size: 0.8rem;">
+                        ⭐ ${movie.rating}
+                    </div>
+                    ${movie.mood && movie.mood !== 'all' ? `
+                    <div style="position: absolute; bottom: 10px; left: 10px; background: ${moodColor}; color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 600;">
+                        ${movie.mood.charAt(0).toUpperCase() + movie.mood.slice(1)}
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title" title="${movie.title}">${movie.title}</h3>
+                    <div class="movie-details">
+                        <span class="movie-year">${movie.year}</span>
+                        <span>${movie.runtime ? movie.runtime + ' min' : 'N/A'}</span>
+                    </div>
+                    <div style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 5px;">
+                        ${movie.genres.slice(0, 2).map(genre => 
+                            `<span style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 10px; font-size: 0.7rem;">${genre}</span>`
+                        ).join('')}
+                    </div>
+                    <div class="movie-actions">
+                        <button class="action-btn watch-trailer-btn" 
+                                onclick="event.stopPropagation(); watchTrailer(${movie.id}, '${movie.title.replace(/'/g, "\\'")}')"
+                                title="Watch Trailer">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="action-btn watchlist-btn ${isInWatchlist ? 'active' : ''}" 
+                                onclick="event.stopPropagation(); toggleWatchlist(${movie.id})"
+                                title="${isInWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}">
+                            <i class="${isInWatchlist ? 'fas' : 'far'} fa-bookmark"></i>
+                        </button>
+                        <button class="action-btn" 
+                                onclick="event.stopPropagation(); goToMovieDetail(${movie.id})"
+                                title="View details">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add click event to card
+            card.addEventListener('click', () => {
+                goToMovieDetail(movie.id);
+            });
+            
+            return card;
+        }
+
+        function showFallbackContent(sectionId, type) {
+            const section = document.getElementById(sectionId);
+            section.innerHTML = `
+                <div class="no-movies">
+                    <i class="fas fa-film"></i>
+                    <h3>No ${type} found</h3>
+                    <p>Try selecting a different mood or check back later</p>
+                    <button class="action-btn" style="margin-top: 1rem; background: linear-gradient(45deg, #ff2a6d, #05d9e8); color: white; border: none;" 
+                            onclick="refreshSection('${sectionId}')">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            `;
+        }
+
+        function showLoadingStates() {
+            const sections = ['personalized-movies', 'tv-shows', 'trending-movies', 'new-movies', 'watchlist-movies'];
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.innerHTML = `
+                        <div class="loading">
+                            <div class="loader"></div>
+                            <p style="margin-top: 10px; color: #8a8fa3;">Loading ${sectionId.replace('-', ' ')}...</p>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function showErrorMessages() {
+            const sections = ['personalized-movies', 'tv-shows', 'trending-movies', 'new-movies'];
+            sections.forEach(sectionId => {
+                showFallbackContent(sectionId, sectionId.replace('-movies', '').replace('-', ' '));
+            });
+        }
+
+        // ========== TV SHOWS LOADING ==========
+        async function loadTVShows() {
+            try {
+                const response = await fetchWithRetry(
+                    `${TMDB_BASE_URL}/trending/tv/week?api_key=${getCurrentApiKey()}&language=en-US&page=1`
+                );
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    const section = document.getElementById('tv-shows');
+                    section.innerHTML = '';
+                    
+                    data.results.slice(0, 8).forEach(show => {
+                        const card = document.createElement('div');
+                        card.className = 'tv-show-card';
+                        
+                        card.innerHTML = `
+                            <img src="${show.poster_path ? TMDB_IMAGE_BASE + show.poster_path : FALLBACK_IMAGE}" 
+                                 alt="${show.name}" class="tv-show-poster"
+                                 onerror="this.src='${FALLBACK_IMAGE}'">
+                            <div class="tv-show-info">
+                                <h3 class="tv-show-title" title="${show.name}">${show.name}</h3>
+                                <div class="movie-details">
+                                    <span>${show.first_air_date ? show.first_air_date.split('-')[0] : 'N/A'}</span>
+                                    <span>⭐ ${show.vote_average ? show.vote_average.toFixed(1) : 'N/A'}</span>
+                                </div>
+                                <div class="movie-actions">
+                                    <button class="action-btn" onclick="showNotification('TV show details coming soon!')">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        section.appendChild(card);
+                    });
+                } else {
+                    showFallbackContent('tv-shows', 'TV shows');
+                }
+                
+            } catch (error) {
+                console.error('Error loading TV shows:', error);
+                showFallbackContent('tv-shows', 'TV shows');
+            }
+        }
+
+        // ========== TRENDING MOVIES ==========
+        async function loadTrendingMovies() {
+            try {
+                const movies = await getMoodBasedMovies(currentMood === 'all' ? 'all' : 'all', 8);
+                
+                if (movies.length > 0) {
+                    const enrichedMovies = await Promise.all(
+                        movies.slice(0, 8).map(movie => enrichMovieData(movie, 'all'))
+                    );
+                    displayMovieSection('trending-movies', enrichedMovies);
+                } else {
+                    showFallbackContent('trending-movies', 'trending');
+                }
+                
+            } catch (error) {
+                console.error('Error loading trending movies:', error);
+                showFallbackContent('trending-movies', 'trending');
+            }
+        }
+
+        // ========== NEW RELEASES ==========
+        async function loadNewMovies() {
+            try {
+                const currentYear = new Date().getFullYear();
+                let url = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}&language=en-US&sort_by=release_date.desc&primary_release_year=${currentYear}&page=1`;
+                
+                const response = await fetchWithRetry(url);
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    const enrichedMovies = await Promise.all(
+                        data.results.slice(0, 8).map(movie => enrichMovieData(movie, 'all'))
+                    );
+                    displayMovieSection('new-movies', enrichedMovies);
+                } else {
+                    showFallbackContent('new-movies', 'new releases');
+                }
+                
+            } catch (error) {
+                console.error('Error loading new movies:', error);
+                showFallbackContent('new-movies', 'new releases');
+            }
+        }
+
+        // ========== ENHANCED EVENT LISTENERS ==========
+        function setupEventListeners() {
+            // Search
+            document.getElementById('search-btn').addEventListener('click', performSearch);
+            document.getElementById('search-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+            
+            // Add debounced search input
+            let searchTimeout;
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    if (e.target.value.trim().length > 2) {
+                        // Could add live search suggestions here
+                    }
+                }, 300);
+            });
+            
+            // Mood buttons with enhanced feedback
+            document.querySelectorAll('.mood-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    const mood = this.dataset.mood;
+                    const description = this.dataset.description || moodConfig[mood]?.description || '';
+                    document.getElementById('mood-description').textContent = description;
+                    document.getElementById('mood-description').style.color = moodConfig[mood]?.colors[0] || '#05d9e8';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    document.getElementById('mood-description').textContent = 'Select a mood to see genre details';
+                    document.getElementById('mood-description').style.color = '#8a8fa3';
+                });
+                
+                btn.addEventListener('click', async function() {
+                    const newMood = this.dataset.mood;
+                    await changeMood(newMood);
+                });
+            });
+            
+            // Refresh personalized button
+            document.getElementById('refresh-personalized').addEventListener('click', async () => {
+                await refreshPersonalizedSection();
+            });
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Ctrl+/ to focus chatbot
+                if (e.ctrlKey && e.key === '/') {
+                    e.preventDefault();
+                    toggleChatbot();
+                    if (document.getElementById('chatbot-modal').style.display === 'flex') {
+                        document.getElementById('chatbot-input').focus();
+                    }
+                }
+                
+                // Esc to close modals
+                if (e.key === 'Escape') {
+                    if (document.getElementById('chatbot-modal').style.display === 'flex') {
+                        toggleChatbot();
+                    }
+                    if (document.getElementById('profile-modal').style.display === 'flex') {
+                        toggleProfileModal();
+                    }
+                    if (!document.getElementById('feedback-popup').classList.contains('hidden')) {
+                        hideFeedbackPopup();
+                    }
+                }
+            });
+        }
+
+        async function changeMood(newMood) {
+            if (currentMood === newMood) return;
+            
+            // Update UI
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.mood-btn[data-mood="${newMood}"]`).classList.add('active');
+            
+            // Update mood indicator
+            const indicator = document.getElementById('current-mood-indicator');
+            const moodDisplay = document.getElementById('mood-display');
+            
+            if (newMood !== 'all') {
+                indicator.style.display = 'inline-flex';
+                moodDisplay.textContent = moodDisplayNames[newMood] || newMood;
+                moodDisplay.style.color = moodConfig[newMood]?.colors[0] || '#05d9e8';
+            } else {
+                indicator.style.display = 'none';
+            }
+            
+            // Track mood change
+            currentMood = newMood;
+            moodHistory.push({
+                mood: newMood,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Update mood preference text
+            document.getElementById('mood-preference-text').textContent = 
+                `Based on your ${newMood} mood, here are personalized recommendations! 🎬`;
+            
+            // Save user data
+            saveUserData();
+            
+            // Update mood insights
+            updateMoodInsights();
+            
+            // Reload mood-based sections
+            await reloadMoodBasedSections();
+            
+            // Show notification
+            showNotification(`Switched to ${moodDisplayNames[newMood]} mood!`);
+        }
+
+        async function reloadMoodBasedSections() {
+            showLoadingStates();
+            
+            try {
+                await Promise.allSettled([
+                    loadPersonalizedMovies(),
+                    loadTrendingMovies(),
+                    loadNewMovies()
+                ]);
+                
+                updatePersonalizationExplanation();
+                
+            } catch (error) {
+                console.error('Error reloading sections:', error);
+                showNotification('Error loading content. Please try again.');
+            }
+        }
+
+        async function refreshPersonalizedSection() {
+            const section = document.getElementById('personalized-movies');
+            section.innerHTML = `
+                <div class="loading">
+                    <div class="loader"></div>
+                    <p>Refreshing personalized recommendations...</p>
+                </div>
+            `;
+            
+            await loadPersonalizedMovies();
+            showNotification('Personalized recommendations refreshed!');
+        }
+
+        function refreshSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.innerHTML = `
+                <div class="loading">
+                    <div class="loader"></div>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                if (sectionId === 'personalized-movies') {
+                    loadPersonalizedMovies();
+                } else if (sectionId === 'tv-shows') {
+                    loadTVShows();
+                } else if (sectionId === 'trending-movies') {
+                    loadTrendingMovies();
+                } else if (sectionId === 'new-movies') {
+                    loadNewMovies();
+                }
+            }, 500);
+        }
+
+        // ========== PERSONALIZATION FUNCTIONS ==========
+        function updatePersonalizationExplanation() {
+            const explanation = document.getElementById('personalization-explanation');
+            const factors = document.getElementById('personalization-factors');
+            
+            if (!explanation || !factors) return;
+            
+            explanation.style.display = 'block';
+            
+            const factorsList = [];
+            
+            if (currentMood !== 'all') {
+                factorsList.push(`your <strong style="color: ${moodConfig[currentMood].colors[0]}">${currentMood}</strong> mood`);
+            }
+            
+            if (userProfile.viewingHistory.length > 0) {
+                factorsList.push('your viewing history');
+            }
+            
+            if (watchlist.length > 0) {
+                factorsList.push('your watchlist');
+            }
+            
+            if (moodHistory.length > 0) {
+                factorsList.push('your mood patterns');
+            }
+            
+            factors.innerHTML = factorsList.length > 0 ? factorsList.join(', ') : 'popular trends';
+        }
+
+        function updateMoodAnalysisSummary() {
+            const summary = document.getElementById('mood-analysis-summary');
+            
+            if (userProfile.viewingHistory.length > 0 || moodHistory.length > 0) {
+                summary.style.display = 'block';
+            }
+        }
+
+        // ========== WATCHLIST FUNCTIONS ==========
+        function toggleWatchlist(movieId) {
+            // Try to find the movie from different sources
+            let movie = allMovies?.find(m => m.id === movieId);
+            
+            // If not found in allMovies, check the watchlist
+            if (!movie) {
+                const existingInWatchlist = watchlist.find(m => m.id === movieId);
+                if (existingInWatchlist) {
+                    movie = existingInWatchlist;
+                }
+            }
+            
+            const index = watchlist.findIndex(m => m.id === movieId);
+            
+            if (index === -1) {
+                // Add to watchlist
+                if (!movie) {
+                    // Try to find movie in the current grid
+                    const movieCard = document.querySelector(`[data-movie-id="${movieId}"]`);
+                    if (!movieCard) {
+                        showNotification("Couldn't find movie details. Please try again.", 'error');
+                        return;
+                    }
+                    
+                    // Extract basic info from the card
+                    const title = movieCard.querySelector('.movie-title')?.textContent || 'Movie';
+                    const year = movieCard.querySelector('.movie-year')?.textContent || 'N/A';
+                    const poster = movieCard.querySelector('.movie-poster')?.src || FALLBACK_IMAGE;
+                    
+                    movie = {
+                        id: movieId,
+                        title: title,
+                        year: year,
+                        poster: poster,
+                        rating: 'N/A',
+                        genres: [],
+                        mood: 'all'
+                    };
+                }
+                
+                watchlist.push({
+                    id: movie.id,
+                    title: movie.title,
+                    poster: movie.poster,
+                    year: movie.year,
+                    rating: movie.rating,
+                    genres: movie.genres || [],
+                    mood: movie.mood || 'all',
+                    added_at: new Date().toISOString()
+                });
+                
+                showNotification(`"${movie.title}" added to watchlist`, 'success');
+                
+                // Track this action
+                userProfile.viewingHistory.push({
+                    movieId: movie.id,
+                    title: movie.title,
+                    action: 'add_to_watchlist',
+                    timestamp: new Date().toISOString()
+                });
+                
+            } else {
+                // Remove from watchlist
+                const removed = watchlist.splice(index, 1)[0];
+                showNotification(`"${removed.title}" removed from watchlist`, 'info');
+            }
+            
+            updateWatchlistDisplay();
+            updateStats();
+            saveUserData();
+            
+            // Update the watchlist button state
+            updateWatchlistButtonState(movieId, index === -1);
+        }
+
+        function updateWatchlistButtonState(movieId, isInWatchlist) {
+            const watchlistButtons = document.querySelectorAll(`[data-movie-id="${movieId}"] .watchlist-btn`);
+            
+            watchlistButtons.forEach(button => {
+                if (isInWatchlist) {
+                    button.classList.add('active');
+                    button.innerHTML = '<i class="fas fa-bookmark"></i>';
+                    button.title = 'Remove from watchlist';
+                } else {
+                    button.classList.remove('active');
+                    button.innerHTML = '<i class="far fa-bookmark"></i>';
+                    button.title = 'Add to watchlist';
+                }
+            });
+        }
+
+        function updateWatchlistDisplay() {
+            const section = document.getElementById('watchlist-movies');
+            
+            if (!section) return;
+            
+            if (watchlist.length === 0) {
+                section.innerHTML = `
+                    <div class="no-movies">
+                        <i class="fas fa-bookmark"></i>
+                        <h3>Your watchlist is empty</h3>
+                        <p>Add movies you want to watch later</p>
+                        <button class="action-btn" style="margin-top: 1rem; background: linear-gradient(45deg, #ff2a6d, #05d9e8); color: white; border: none;" 
+                                onclick="changeMood('all')">
+                            <i class="fas fa-film"></i> Browse Movies
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            displayMovieSection('watchlist-movies', watchlist.slice(0, 8));
+        }
+
+        // ========== STATS AND UI ==========
+        function updateStats() {
+            const watchedCount = userProfile.viewingHistory.filter(item => 
+                item.action === 'view_details' || item.action === 'watched'
+            ).length;
+            
+            document.getElementById('movies-watched').textContent = watchedCount;
+            document.getElementById('watchlist-count').textContent = watchlist.length;
+            document.getElementById('moods-tracked').textContent = new Set(moodHistory.map(m => m.mood)).size;
+            
+            document.getElementById('profile-watched').textContent = watchedCount;
+            document.getElementById('profile-watchlist').textContent = watchlist.length;
+        }
+
+        function updateUI() {
+            updateStats();
+            updateMoodSuggestions();
+            updateMoodInsights();
+        }
+
+        // ========== UTILITY FUNCTIONS ==========
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            // Add color based on type
+            if (type === 'success') {
+                notification.style.borderColor = '#00B894';
+            } else if (type === 'error') {
+                notification.style.borderColor = '#D63031';
+            } else if (type === 'warning') {
+                notification.style.borderColor = '#FDCB6E';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        async function performSearch() {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) {
+                showNotification('Please enter a search term', 'warning');
+                return;
+            }
+            
+            searchHistory.push({
+                query: query,
+                timestamp: new Date().toISOString()
+            });
+            
+            saveUserData();
+            updateRecentSearches();
+            
+            // Show searching notification
+            showNotification(`Searching for "${query}"...`);
+            
+            // Redirect to search results
+            window.location.href = `/search-results?q=${encodeURIComponent(query)}`;
+        }
+
+        function goToMovieDetail(movieId) {
+            // Track this view
+            const movie = allMovies?.find(m => m.id === movieId);
+            if (movie) {
+                userProfile.viewingHistory.push({
+                    movieId: movieId,
+                    title: movie.title,
+                    action: 'view_details',
+                    timestamp: new Date().toISOString(),
+                    mood: currentMood,
+                    genres: movie.genres || []
+                });
+                saveUserData();
+            }
+            
+            // Redirect to movie details page
+            window.location.href = `/movie-details?movie_id=${movieId}`;
+        }
+
+        async function watchTrailer(movieId, movieTitle) {
+            showNotification('Searching for trailer...', 'info');
+            
+            try {
+                const response = await fetchWithRetry(
+                    `${TMDB_BASE_URL}/movie/${movieId}/videos?api_key=${getCurrentApiKey()}&language=en-US`
+                );
+                const data = await response.json();
+                
+                let trailerKey = null;
+                if (data.results && data.results.length > 0) {
+                    const trailer = data.results.find(v => 
+                        v.type === 'Trailer' && v.site === 'YouTube' && v.official === true
+                    ) || data.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+                    
+                    if (trailer) {
+                        trailerKey = trailer.key;
+                    }
+                }
+                
+                if (trailerKey) {
+                    showNotification('Opening trailer...', 'success');
+                    setTimeout(() => {
+                        window.open(`https://www.youtube.com/watch?v=${trailerKey}`, '_blank');
+                    }, 500);
+                } else {
+                    showNotification('No official trailer found. Searching YouTube...', 'info');
+                    setTimeout(() => {
+                        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(movieTitle + ' trailer')}`, '_blank');
+                    }, 1000);
+                }
+                
+            } catch (error) {
+                console.error('Error finding trailer:', error);
+                showNotification('Error loading trailer', 'error');
+            }
+        }
+
+        // ========== ENHANCED CHATBOT FUNCTIONS ==========
+        function setupEnhancedChatbot() {
+            document.getElementById('chatbot-toggle').addEventListener('click', toggleChatbot);
+            
+            // Setup voice input
+            const voiceBtn = document.getElementById('voice-btn');
+            if (voiceBtn) {
+                voiceBtn.addEventListener('click', toggleVoiceRecognition);
+            }
+            
+            // Add initial quick suggestions
+            updateQuickSuggestions();
+            
+            // Load recent searches
+            updateRecentSearches();
+        }
+
+        function toggleChatbot() {
+            const modal = document.getElementById('chatbot-modal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            
+            if (modal.style.display === 'flex') {
+                document.getElementById('chatbot-input').focus();
+                // Scroll to bottom
+                const body = document.getElementById('chatbot-body');
+                body.scrollTop = body.scrollHeight;
+            }
+        }
+
+        function handleChatbotKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendChatbotMessage();
+            }
+        }
+
+        function sendChatbotMessage() {
+            const input = document.getElementById('chatbot-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addChatMessage(message, 'user');
+            
+            // Clear input
+            input.value = '';
+            
+            // Process query
+            processChatbotQuery(message);
+        }
+
+        function sendSuggestion(query) {
+            document.getElementById('chatbot-input').value = query;
+            sendChatbotMessage();
+        }
+
+        function addChatMessage(text, sender) {
+            const body = document.getElementById('chatbot-body');
+            const message = document.createElement('div');
+            message.className = `chat-message ${sender}-message`;
+            message.textContent = text;
+            body.appendChild(message);
+            
+            // Scroll to bottom
+            body.scrollTop = body.scrollHeight;
+        }
+
+        async function processChatbotQuery(query) {
+            // Add typing indicator
+            showTypingIndicator();
+            
+            // Parse the query
+            const parsedQuery = parseNaturalLanguageQuery(query);
+            
+            try {
+                // Search TMDB for movies
+                const movies = await searchMoviesFromChatbot(parsedQuery);
+                
+                // Remove typing indicator
+                removeTypingIndicator();
+                
+                // Show what we understood
+                setTimeout(() => {
+                    const response = generateChatbotResponse(parsedQuery, movies.length);
+                    addChatMessage(response, 'bot');
+                    
+                    // Update context
+                    updateContext(parsedQuery, movies);
+                    
+                    // Display movie suggestions
+                    if (movies.length > 0) {
+                        displayMovieSuggestions(movies.slice(0, 3)); // Show top 3
+                        
+                        // Add "See more" button
+                        if (movies.length > 3) {
+                            setTimeout(() => {
+                                const seeMoreBtn = document.createElement('button');
+                                seeMoreBtn.className = 'action-btn';
+                                seeMoreBtn.style.marginTop = '10px';
+                                seeMoreBtn.style.background = 'linear-gradient(45deg, #ff2a6d, #05d9e8)';
+                                seeMoreBtn.style.color = 'white';
+                                seeMoreBtn.style.border = 'none';
+                                seeMoreBtn.style.width = '100%';
+                                seeMoreBtn.innerHTML = '<i class="fas fa-search"></i> See More Results';
+                                seeMoreBtn.onclick = () => {
+                                    const searchUrl = buildSearchUrl(parsedQuery);
+                                    window.location.href = searchUrl;
+                                };
+                                
+                                const lastMessage = document.querySelector('#chatbot-body .chat-message:last-child');
+                                lastMessage.appendChild(document.createElement('br'));
+                                lastMessage.appendChild(seeMoreBtn);
+                            }, 100);
+                        }
+                    } else {
+                        const noResultsMsg = document.createElement('div');
+                        noResultsMsg.style.marginTop = '10px';
+                        noResultsMsg.style.color = '#8a8fa3';
+                        noResultsMsg.style.fontSize = '0.9rem';
+                        noResultsMsg.innerHTML = `No movies found. Try searching for something else or <button class="suggestion-btn" style="margin-left: 5px;" onclick="sendSuggestion('popular movies')">popular movies</button>`;
+                        
+                        const lastMessage = document.querySelector('#chatbot-body .chat-message:last-child');
+                        lastMessage.appendChild(noResultsMsg);
+                    }
+                }, 500);
+                
+            } catch (error) {
+                console.error('Chatbot search error:', error);
+                removeTypingIndicator();
+                addChatMessage("Sorry, I encountered an error while searching. Please try again.", 'bot');
+            }
+        }
+
+        function showTypingIndicator() {
+            const body = document.getElementById('chatbot-body');
+            const indicator = document.createElement('div');
+            indicator.className = 'typing-indicator';
+            indicator.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            indicator.id = 'typing-indicator';
+            body.appendChild(indicator);
+            body.scrollTop = body.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function updateQuickSuggestions() {
+            const suggestions = [
+                "action movies from 2023",
+                "romantic comedies",
+                "scary horror movies",
+                "inspiring documentaries",
+                "sci-fi adventures",
+                "family animated movies"
+            ];
+            
+            const quickSuggestions = document.querySelector('.quick-suggestions');
+            if (quickSuggestions) {
+                quickSuggestions.innerHTML = '';
+                suggestions.forEach(suggestion => {
+                    const btn = document.createElement('button');
+                    btn.className = 'suggestion-btn';
+                    btn.textContent = suggestion;
+                    btn.onclick = () => sendSuggestion(suggestion);
+                    quickSuggestions.appendChild(btn);
+                });
+            }
+        }
+
+        function updateRecentSearches() {
+            const recent = searchHistory.slice(-3).reverse();
+            const container = document.getElementById('recent-searches');
+            
+            if (container && recent.length > 0) {
+                container.innerHTML = `
+                    Recent: ${recent.map(item => 
+                        `<button class="suggestion-btn" style="margin: 2px; font-size: 0.7rem;" 
+                                onclick="sendSuggestion('${item.query.replace(/'/g, "\\'")}')">
+                            ${item.query.substring(0, 15)}${item.query.length > 15 ? '...' : ''}
+                        </button>`
+                    ).join('')}
+                `;
+            }
+        }
+
+        async function searchMoviesFromChatbot(parsedQuery) {
+            let searchQuery = '';
+            
+            // Build search query from parsed data
+            if (parsedQuery.genres.length > 0) {
+                searchQuery += parsedQuery.genres.join(' ');
+            }
+            
+            if (parsedQuery.mood) {
+                // Convert mood to search terms
+                const moodKeywords = {
+                    'happy': 'comedy funny',
+                    'sad': 'drama emotional',
+                    'angry': 'action thriller',
+                    'romantic': 'romance love',
+                    'adventurous': 'adventure fantasy',
+                    'inspired': 'documentary inspirational',
+                    'horror': 'horror scary'
+                };
+                searchQuery += ' ' + (moodKeywords[parsedQuery.mood] || '');
+            }
+            
+            if (parsedQuery.year) {
+                searchQuery += ' ' + parsedQuery.year;
+            }
+            
+            if (parsedQuery.keywords.length > 0) {
+                searchQuery += ' ' + parsedQuery.keywords.join(' ');
+            }
+            
+            // Default to query if no specific criteria
+            if (!searchQuery.trim()) {
+                searchQuery = parsedQuery.originalQuery || 'popular';
+            }
+            
+            // Search TMDB
+            try {
+                let url = '';
+                
+                // If we have a specific year, use discover API
+                if (parsedQuery.year) {
+                    url = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}` +
+                          `&language=en-US&sort_by=popularity.desc` +
+                          `&primary_release_year=${parsedQuery.year}` +
+                          `&page=1`;
+                } 
+                // If we have genres, use genre search
+                else if (parsedQuery.genres.length > 0) {
+                    const genreIds = parsedQuery.genres.map(genre => {
+                        const genreEntry = Object.entries(genreNames).find(([id, name]) => 
+                            name.toLowerCase() === genre.toLowerCase()
+                        );
+                        return genreEntry ? genreEntry[0] : null;
+                    }).filter(id => id !== null);
+                    
+                    if (genreIds.length > 0) {
+                        url = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}` +
+                              `&language=en-US&sort_by=popularity.desc` +
+                              `&with_genres=${genreIds.join(',')}` +
+                              `&page=1`;
+                    }
+                }
+                // Otherwise, use search API
+                else {
+                    url = `${TMDB_BASE_URL}/search/movie?api_key=${getCurrentApiKey()}` +
+                          `&language=en-US&query=${encodeURIComponent(searchQuery.trim())}` +
+                          `&page=1`;
+                }
+                
+                // If no specific URL, use popular movies
+                if (!url) {
+                    url = `${TMDB_BASE_URL}/movie/popular?api_key=${getCurrentApiKey()}&language=en-US&page=1`;
+                }
+                
+                const response = await fetchWithRetry(url);
+                const data = await response.json();
+                
+                // Enrich movie data
+                const enrichedMovies = await Promise.all(
+                    (data.results || []).slice(0, 6).map(movie => enrichMovieData(movie))
+                );
+                
+                return enrichedMovies;
+                
+            } catch (error) {
+                console.error('Error searching movies:', error);
+                
+                // Fallback to popular movies
+                const fallbackResponse = await fetchWithRetry(
+                    `${TMDB_BASE_URL}/movie/popular?api_key=${getCurrentApiKey()}&language=en-US&page=1`
+                );
+                const fallbackData = await fallbackResponse.json();
+                
+                const enrichedMovies = await Promise.all(
+                    (fallbackData.results || []).slice(0, 3).map(movie => enrichMovieData(movie))
+                );
+                
+                return enrichedMovies;
+            }
+        }
+
+        function displayMovieSuggestions(movies) {
+            const suggestionsContainer = document.createElement('div');
+            suggestionsContainer.className = 'movie-suggestions';
+            
+            movies.forEach(movie => {
+                const movieCard = document.createElement('div');
+                movieCard.className = 'movie-suggestion-card';
+                movieCard.style.cursor = 'pointer';
+                
+                movieCard.innerHTML = `
+                    <img src="${movie.poster}" alt="${movie.title}" 
+                         style="width: 100%; height: 120px; object-fit: cover;"
+                         onerror="this.src='${FALLBACK_IMAGE}'">
+                    <div style="padding: 8px;">
+                        <div style="font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            ${movie.title}
+                        </div>
+                        <div style="font-size: 0.7rem; color: #8a8fa3; margin-top: 4px;">
+                            ⭐ ${movie.rating} • ${movie.year}
+                        </div>
+                    </div>
+                `;
+                
+                movieCard.addEventListener('click', () => {
+                    goToMovieDetail(movie.id);
+                });
+                
+                movieCard.addEventListener('mouseenter', () => {
+                    movieCard.style.transform = 'translateY(-2px)';
+                    movieCard.style.borderColor = 'rgba(5, 217, 232, 0.5)';
+                });
+                
+                movieCard.addEventListener('mouseleave', () => {
+                    movieCard.style.transform = 'translateY(0)';
+                    movieCard.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                });
+                
+                suggestionsContainer.appendChild(movieCard);
+            });
+            
+            const lastMessage = document.querySelector('#chatbot-body .chat-message:last-child');
+            lastMessage.appendChild(suggestionsContainer);
+        }
+
+        function generateChatbotResponse(parsedQuery, movieCount) {
+            let response = "I found ";
+            
+            if (movieCount === 0) {
+                return "I couldn't find any movies matching your request. Try being more specific or searching for something else.";
+            }
+            
+            const parts = [];
+            
+            if (parsedQuery.mood) {
+                parts.push(`<strong>${parsedQuery.mood}</strong> mood`);
+            }
+            
+            if (parsedQuery.genres.length > 0) {
+                parts.push(`<strong>${parsedQuery.genres.join(', ')}</strong> movies`);
+            }
+            
+            if (parsedQuery.year) {
+                parts.push(`movies from <strong>${parsedQuery.year}</strong>`);
+            }
+            
+            if (parsedQuery.keywords.length > 0) {
+                parts.push(`<strong>${parsedQuery.keywords.join(', ')}</strong> movies`);
+            }
+            
+            if (parts.length > 0) {
+                response += `${movieCount} ${parts.join(' ')}. Here are some suggestions:`;
+            } else {
+                response = `I found ${movieCount} movies. Here are some suggestions:`;
+            }
+            
+            return response;
+        }
+
+        function parseNaturalLanguageQuery(query) {
+            const lowerQuery = query.toLowerCase();
+            const parsed = {
+                originalQuery: query,
+                genres: [],
+                year: null,
+                mood: null,
+                keywords: [],
+                hasSearchableContent: false
+            };
+            
+            // Mood detection
+            const moodKeywords = {
+                'happy': ['happy', 'comedy', 'funny', 'uplifting', 'feel-good', 'lighthearted'],
+                'sad': ['sad', 'emotional', 'drama', 'tearjerker', 'melancholic', 'depressing'],
+                'angry': ['angry', 'action', 'violent', 'thriller', 'intense', 'revenge'],
+                'romantic': ['romantic', 'love', 'romance', 'relationship', 'heartwarming'],
+                'adventurous': ['adventure', 'fantasy', 'epic', 'journey', 'exploration', 'quest'],
+                'inspired': ['inspired', 'inspirational', 'educational', 'documentary', 'thought-provoking', 'motivational'],
+                'horror': ['horror', 'scary', 'terror', 'suspense', 'frightening', 'creepy']
+            };
+            
+            for (const [mood, keywords] of Object.entries(moodKeywords)) {
+                if (keywords.some(keyword => lowerQuery.includes(keyword))) {
+                    parsed.mood = mood;
+                    break;
+                }
+            }
+            
+            // Genre detection
+            const genreMap = {
+                'action': 'Action',
+                'adventure': 'Adventure',
+                'comedy': 'Comedy',
+                'drama': 'Drama',
+                'horror': 'Horror',
+                'romance': 'Romance',
+                'romantic': 'Romance',
+                'sci-fi': 'Science Fiction',
+                'science fiction': 'Science Fiction',
+                'science': 'Science Fiction',
+                'thriller': 'Thriller',
+                'documentary': 'Documentary',
+                'documentaries': 'Documentary',
+                'fantasy': 'Fantasy',
+                'animation': 'Animation',
+                'animated': 'Animation',
+                'family': 'Family',
+                'music': 'Music',
+                'musical': 'Music',
+                'mystery': 'Mystery',
+                'crime': 'Crime',
+                'war': 'War',
+                'western': 'Western'
+            };
+            
+            for (const [keyword, genre] of Object.entries(genreMap)) {
+                if (lowerQuery.includes(keyword) && !parsed.genres.includes(genre)) {
+                    parsed.genres.push(genre);
+                }
+            }
+            
+            // Year detection (looking for 4-digit years)
+            const yearMatch = lowerQuery.match(/\b(19|20)\d{2}\b/);
+            if (yearMatch) {
+                parsed.year = yearMatch[0];
+            }
+            
+            // Extract other keywords
+            const commonKeywords = ['new', 'latest', 'popular', 'trending', 'top', 'best', 'classic', 'old', 'recent', 'upcoming'];
+            commonKeywords.forEach(keyword => {
+                if (lowerQuery.includes(keyword)) {
+                    parsed.keywords.push(keyword);
+                }
+            });
+            
+            // Actor/director detection (simple)
+            const peopleKeywords = ['starring', 'with', 'by', 'directed by', 'featuring'];
+            
+            parsed.hasSearchableContent = parsed.genres.length > 0 || parsed.year || parsed.mood || parsed.keywords.length > 0;
+            
+            return parsed;
+        }
+
+        function updateContext(parsedQuery, results) {
+            conversationContext.lastSearch = parsedQuery;
+            conversationContext.suggestionsGiven = results.map(m => m.id);
+            
+            // Update preferences based on interaction
+            if (results.length > 0) {
+                results.forEach(movie => {
+                    movie.genres?.forEach(genre => {
+                        conversationContext.preferences[genre] = 
+                            (conversationContext.preferences[genre] || 0) + 1;
+                    });
+                });
+            }
+            
+            saveUserData();
+        }
+
+        function buildSearchUrl(parsedQuery) {
+            let searchQuery = '';
+            
+            if (parsedQuery.genres.length > 0) {
+                searchQuery += parsedQuery.genres.join(' ');
+            }
+            
+            if (parsedQuery.mood) {
+                searchQuery += ` ${parsedQuery.mood}`;
+            }
+            
+            if (parsedQuery.year) {
+                searchQuery += ` ${parsedQuery.year}`;
+            }
+            
+            if (parsedQuery.keywords.length > 0) {
+                searchQuery += ` ${parsedQuery.keywords.join(' ')}`;
+            }
+            
+            if (!searchQuery.trim() && parsedQuery.originalQuery) {
+                searchQuery = parsedQuery.originalQuery;
+            }
+            
+            return `/search-results?q=${encodeURIComponent(searchQuery.trim())}`;
+        }
+
+        // ========== VOICE RECOGNITION ==========
+        let recognition = null;
+        let isListening = false;
+
+        function toggleVoiceRecognition() {
+            const voiceBtn = document.getElementById('voice-btn');
+            
+            if (!isListening) {
+                startVoiceRecognition();
+                voiceBtn.classList.add('listening');
+                voiceBtn.innerHTML = '<i class="fas fa-stop"></i>';
+                voiceBtn.title = 'Stop listening';
+            } else {
+                stopVoiceRecognition();
+                voiceBtn.classList.remove('listening');
+                voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+                voiceBtn.title = 'Voice search';
+            }
+        }
+
+        function startVoiceRecognition() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                showNotification('Speech recognition not supported in this browser.', 'error');
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            
+            recognition.onstart = () => {
+                isListening = true;
+                showNotification('Listening... Speak now.', 'info');
+            };
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('chatbot-input').value = transcript;
+                
+                // Auto-send if query is reasonable length
+                if (transcript.length > 3) {
+                    setTimeout(() => sendChatbotMessage(), 500);
+                }
+            };
+            
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                showNotification('Error with speech recognition: ' + event.error, 'error');
+                stopVoiceRecognition();
+            };
+            
+            recognition.onend = () => {
+                stopVoiceRecognition();
+            };
+            
+            try {
+                recognition.start();
+            } catch (error) {
+                console.error('Failed to start recognition:', error);
+                showNotification('Failed to start voice recognition.', 'error');
+            }
+        }
+
+        function stopVoiceRecognition() {
+            if (recognition) {
+                recognition.stop();
+            }
+            isListening = false;
+            
+            const voiceBtn = document.getElementById('voice-btn');
+            voiceBtn.classList.remove('listening');
+            voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            voiceBtn.title = 'Voice search';
+        }
+
+        // ========== ACCESSIBILITY ==========
+        function setupAccessibility() {
+            // Add ARIA labels
+            document.getElementById('search-input').setAttribute('aria-label', 'Search movies');
+            document.getElementById('chatbot-input').setAttribute('aria-label', 'Chat with movie assistant');
+            
+            // Add keyboard navigation hints
+            document.addEventListener('keydown', (e) => {
+                // Focus trap for modals
+                if (document.getElementById('chatbot-modal').style.display === 'flex') {
+                    const focusableElements = document.querySelectorAll('#chatbot-modal button, #chatbot-modal input');
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+                    
+                    if (e.key === 'Tab') {
+                        if (e.shiftKey && document.activeElement === firstElement) {
+                            e.preventDefault();
+                            lastElement.focus();
+                        } else if (!e.shiftKey && document.activeElement === lastElement) {
+                            e.preventDefault();
+                            firstElement.focus();
+                        }
+                    }
+                }
+            });
+        }
+
+        // ========== PROFILE MODAL FUNCTIONS ==========
+        function toggleProfileModal() {
+            const modal = document.getElementById('profile-modal');
+            
+            // Update mood profile stats before showing
+            updateMoodProfileStats();
+            
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function updateMoodProfileStats() {
+            const patterns = analyzeUserMoodPatterns();
+            
+            // Most common mood
+            const mostCommonMood = Object.entries(patterns.frequentMoods)
+                .sort((a, b) => b[1] - a[1])[0];
+            
+            document.getElementById('most-common-mood').textContent = 
+                mostCommonMood ? moodDisplayNames[mostCommonMood[0]] : 'None';
+            
+            if (mostCommonMood) {
+                document.getElementById('most-common-mood').style.color = 
+                    moodConfig[mostCommonMood[0]]?.colors[0] || '#05d9e8';
+            }
+            
+            // Favorite genre
+            const favoriteGenre = Object.entries(patterns.genrePreferences)
+                .sort((a, b) => b[1] - a[1])[0];
+            
+            document.getElementById('favorite-genre').textContent = 
+                favoriteGenre ? favoriteGenre[0] : 'None';
+            
+            // Mood accuracy
+            const accuracy = userProfile.moodAccuracy || 0;
+            document.getElementById('mood-accuracy').textContent = `${accuracy}%`;
+            document.getElementById('mood-accuracy').style.color = 
+                accuracy > 70 ? '#00B894' : accuracy > 40 ? '#FDCB6E' : '#D63031';
+        }
+
+        function logout() {
+            // Save final data
+            saveUserData();
+            
+            // Clear session data
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('cineSoulSession');
+            
+            // Redirect to welcome page
+            window.location.href = '/';
+        }
+
+        // ========== FEEDBACK FUNCTIONS ==========
+        function showFeedbackPopup() {
+            document.getElementById('feedback-popup').classList.remove('hidden');
+        }
+
+        function hideFeedbackPopup() {
+            document.getElementById('feedback-popup').classList.add('hidden');
+            document.getElementById('feedback-text').value = '';
+        }
+
+        function submitFeedback() {
+            const feedback = document.getElementById('feedback-text').value.trim();
+            
+            if (!feedback) {
+                showNotification('Please enter your feedback', 'warning');
+                return;
+            }
+            
+            const feedbackData = {
+                message: feedback,
+                timestamp: new Date().toISOString(),
+                user: currentUser ? currentUser.username : 'Anonymous',
+                mood: currentMood,
+                page: 'home'
+            };
+            
+            // Save feedback locally
+            const allFeedback = JSON.parse(localStorage.getItem('cineSoulFeedback') || '[]');
+            allFeedback.push(feedbackData);
+            localStorage.setItem('cineSoulFeedback', JSON.stringify(allFeedback));
+            
+            console.log('Feedback submitted:', feedbackData);
+            showNotification('Thank you for your feedback! We appreciate your input.', 'success');
+            
+            hideFeedbackPopup();
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            console.log('CineSoul Home Page Loaded');
+            
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>

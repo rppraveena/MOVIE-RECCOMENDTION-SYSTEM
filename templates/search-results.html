@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineSoul - Search Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background: #0a0a16;
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .background-effects {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .gradient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.1;
+        animation: float 20s infinite linear;
+    }
+
+    .orb-1 {
+        width: 400px;
+        height: 400px;
+        background: #ff2a6d;
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+    }
+
+    .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: #05d9e8;
+        top: 60%;
+        left: 70%;
+        animation-delay: -7s;
+    }
+
+    .orb-3 {
+        width: 300px;
+        height: 300px;
+        background: #d1f7ff;
+        top: 30%;
+        left: 80%;
+        animation-delay: -14s;
+    }
+
+    @keyframes float {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        33% { transform: translate(40px, -60px) rotate(120deg); }
+        66% { transform: translate(-30px, 30px) rotate(240deg); }
+        100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    .navbar {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(15px);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(5, 217, 232, 0.3);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .search-container {
+        flex: 1;
+        max-width: 500px;
+        margin: 0 2rem;
+    }
+
+    .search-box {
+        display: flex;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(5, 217, 232, 0.3);
+        border-radius: 25px;
+        overflow: hidden;
+    }
+
+    .search-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    .search-input:focus {
+        outline: none;
+    }
+
+    .search-btn {
+        background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+        border: none;
+        color: white;
+        padding: 0.8rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .search-btn:hover {
+        opacity: 0.9;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .search-results-header {
+        padding: 120px 2rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .search-info {
+        background: rgba(10, 25, 47, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(5, 217, 232, 0.2);
+    }
+
+    .search-title {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .search-type-badge {
+        background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+        color: white;
+        padding: 0.3rem 1rem;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .mood-detection {
+        background: rgba(255, 42, 109, 0.1);
+        border: 1px solid rgba(255, 42, 109, 0.3);
+        border-radius: 15px;
+        padding: 1rem 1.5rem;
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .mood-icon {
+        font-size: 2rem;
+        color: #ff2a6d;
+    }
+
+    .mood-text {
+        color: #d1f7ff;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .mood-tag {
+        background: rgba(255, 42, 109, 0.2);
+        color: #ff2a6d;
+        padding: 0.3rem 1rem;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        border: 1px solid rgba(255, 42, 109, 0.3);
+    }
+
+    .results-count {
+        color: #8a8fa3;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .filters {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        background: rgba(255, 255, 255, 0.05);
+        color: #8a8fa3;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1.5rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+    }
+
+    .filter-btn.active {
+        background: rgba(5, 217, 232, 0.2);
+        color: #05d9e8;
+        border-color: rgba(5, 217, 232, 0.5);
+    }
+
+    .filter-btn:hover {
+        background: rgba(5, 217, 232, 0.1);
+        color: #05d9e8;
+    }
+
+    .movies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .movie-card {
+        background: rgba(10, 25, 47, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        position: relative;
+    }
+
+    .movie-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(5, 217, 232, 0.5);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .movie-card-poster {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .movie-card-info {
+        padding: 1rem;
+    }
+
+    .movie-card-title {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .movie-card-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #8a8fa3;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .movie-card-actions {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 5px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .movie-card:hover .movie-card-actions {
+        opacity: 1;
+    }
+
+    .action-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .action-icon:hover {
+        background: rgba(5, 217, 232, 0.8);
+        transform: scale(1.1);
+    }
+
+    .watch-trailer-btn {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 2;
+    }
+
+    .movie-card:hover .watch-trailer-btn {
+        opacity: 1;
+    }
+
+    .character-badge {
+        color: #05d9e8;
+        font-size: 0.8rem;
+        background: rgba(5, 217, 232, 0.1);
+        padding: 0.2rem 0.5rem;
+        border-radius: 10px;
+        margin-top: 0.3rem;
+        display: inline-block;
+    }
+
+    .language-badge {
+        color: #ff2a6d;
+        font-size: 0.7rem;
+        background: rgba(255, 42, 109, 0.1);
+        padding: 0.2rem 0.5rem;
+        border-radius: 10px;
+        margin-left: 0.5rem;
+    }
+
+    .year-badge {
+        color: #d1f7ff;
+        font-size: 0.7rem;
+        background: rgba(209, 247, 255, 0.1);
+        padding: 0.2rem 0.5rem;
+        border-radius: 10px;
+        margin-left: 0.5rem;
+    }
+
+    .loading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+        grid-column: 1/-1;
+    }
+
+    .loader {
+        width: 40px;
+        height: 40px;
+        border: 3px solid transparent;
+        border-top: 3px solid #05d9e8;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .error-message {
+        text-align: center;
+        padding: 3rem;
+        color: #ff2a6d;
+        grid-column: 1/-1;
+    }
+
+    .error-message i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 4rem;
+        color: #8a8fa3;
+        grid-column: 1/-1;
+    }
+
+    .no-results i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #ff2a6d;
+    }
+
+    .trailer-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(10px);
+    }
+
+    .trailer-modal.active {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .trailer-container {
+        width: 90%;
+        max-width: 900px;
+        background: rgba(10, 25, 47, 0.95);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(5, 217, 232, 0.3);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .trailer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .trailer-title {
+        font-size: 1.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .close-trailer {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .close-trailer:hover {
+        color: #ff2a6d;
+    }
+
+    .trailer-content {
+        padding: 1rem;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .trailer-video {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .trailer-video iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .trailer-fallback {
+        text-align: center;
+        padding: 2rem;
+        color: #8a8fa3;
+    }
+
+    .trailer-fallback-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .trailer-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .trailer-link:hover {
+        background: rgba(5, 217, 232, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .trailer-source {
+        display: inline-block;
+        padding: 0.2rem 0.8rem;
+        background: rgba(255, 42, 109, 0.2);
+        color: #ff2a6d;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+    }
+
+    .loading-trailer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .trailer-sources {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .source-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        border: 1px solid rgba(5, 217, 232, 0.3);
+        background: rgba(5, 217, 232, 0.1);
+        color: #05d9e8;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .source-btn:hover {
+        background: rgba(5, 217, 232, 0.3);
+    }
+
+    .suggestion-box {
+        background: rgba(10, 25, 47, 0.7);
+        border: 1px solid rgba(5, 217, 232, 0.2);
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        max-width: 1400px;
+        margin: 2rem auto;
+    }
+
+    .suggestion-title {
+        color: #05d9e8;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .suggestion-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .suggestion-tag {
+        background: rgba(255, 255, 255, 0.05);
+        color: #8a8fa3;
+        padding: 0.5rem 1rem;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+    }
+
+    .suggestion-tag:hover {
+        background: rgba(5, 217, 232, 0.1);
+        color: #05d9e8;
+        border-color: rgba(5, 217, 232, 0.3);
+    }
+
+    .footer {
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(15px);
+        padding: 3rem 2rem;
+        margin-top: 4rem;
+        border-top: 1px solid rgba(5, 217, 232, 0.2);
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .footer-section h4 {
+        color: #05d9e8;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .footer-section ul {
+        list-style: none;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-section ul li a {
+        color: #8a8fa3;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .footer-section ul li a:hover {
+        color: #05d9e8;
+    }
+
+    .copyright {
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #8a8fa3;
+        font-size: 0.9rem;
+    }
+
+    .notification {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: rgba(10, 25, 47, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(5, 217, 232, 0.3);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        z-index: 10000;
+        max-width: 300px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .action-btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: none;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        .navbar {
+            flex-wrap: wrap;
+            padding: 1rem;
+        }
+        
+        .search-container {
+            order: 3;
+            margin: 1rem 0 0;
+            max-width: 100%;
+        }
+        
+        .search-results-header {
+            padding: 140px 1rem 1rem;
+        }
+        
+        .movies-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            padding: 1rem;
+        }
+        
+        .search-title {
+            font-size: 1.5rem;
+        }
+        
+        .movie-card-details {
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+        
+        .trailer-container {
+            width: 95%;
+        }
+        
+        .trailer-video {
+            height: 250px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .logo h1 {
+            font-size: 1.5rem;
+        }
+        
+        .search-title {
+            font-size: 1.3rem;
+        }
+        
+        .movies-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .filter-btn {
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+        
+        .movie-card-poster {
+            height: 200px;
+        }
+        
+        .trailer-video {
+            height: 200px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/home" style="text-decoration: none;">
+                <h1>CineSoul</h1>
+            </a>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="search-input" placeholder="Search for movies, actors, languages...">
+                <button class="search-btn" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic" id="profile-pic" onclick="window.location.href='/home'">U</div>
+        </div>
+    </nav>
+
+    <!-- Trailer Modal -->
+    <div class="trailer-modal" id="trailerModal">
+        <div class="trailer-container">
+            <div class="trailer-header">
+                <div class="trailer-title">
+                    <i class="fas fa-play-circle"></i>
+                    <span id="trailerMovieTitle">Loading Trailer...</span>
+                </div>
+                <button class="close-trailer" id="closeTrailer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="trailer-content" id="trailerContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Results Content -->
+    <div class="search-results-header">
+        <div class="search-info">
+            <h1 class="search-title">
+                Search Results for "<span id="search-query-display">...</span>"
+                <span class="search-type-badge" id="search-type-badge" style="display: none;">
+                    <i class="fas fa-filter"></i> <span id="search-type-text"></span>
+                </span>
+            </h1>
+            
+            <!-- Mood Detection Box -->
+            <div class="mood-detection" id="mood-detection" style="display: none;">
+                <div class="mood-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="mood-text">
+                    You seem to be looking for <span id="detected-mood">romantic</span> movies!
+                    Here are our best picks for you.
+                    <span class="mood-tag" id="mood-tag">Romance</span>
+                </div>
+            </div>
+            
+            <div class="results-count" id="results-count">
+                Loading results...
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn active" onclick="filterResults('all')">All</button>
+                <button class="filter-btn" onclick="filterResults('movie')">Movies</button>
+                <button class="filter-btn" onclick="filterResults('tv')">TV Shows</button>
+                <button class="filter-btn" onclick="filterResults('popular')">Popular</button>
+                <button class="filter-btn" onclick="filterResults('recent')">Recent</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Movies Grid -->
+    <div class="movies-grid" id="movies-grid">
+        <div class="loading">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+    <!-- Suggestions -->
+    <div class="suggestion-box">
+        <h3 class="suggestion-title">
+            <i class="fas fa-lightbulb"></i> Not finding what you're looking for?
+        </h3>
+        <p style="color: #8a8fa3; margin-bottom: 1rem;">Try searching for:</p>
+        <div class="suggestion-tags" id="suggestions">
+            <!-- Dynamic suggestions will load here -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>CineSoul</h4>
+                <p>Dreams and anguish bring us together 💙</p>
+                <p>Find movies that match your vibe ❤️</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="#" onclick="showNotification('Coming soon!')">Browse Movies</a></li>
+                    <li><a href="#" onclick="showNotification('Coming soon!')">Top Rated</a></li>
+                    <li><a href="#" onclick="showNotification('Coming soon!')">Genres</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#" onclick="showNotification('Contact: support@cinesoul.com')">Help Center</a></li>
+                    <li><a href="#" onclick="showNotification('Contact: +91 98765 43210')">Contact Us</a></li>
+                    <li><a href="#" onclick="showNotification('Thank you for your feedback!')">Feedback</a></li>
+                    <li><a href="#" onclick="showNotification('Report sent to support team')">Report Issue</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 CineSoul. All rights reserved. Made with ❤️ for movie lovers like you everywhere.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Powered by TMDB API • Data from The Movie Database</p>
+        </div>
+    </footer>
+
+    <script>
+        // API Configuration
+        const TMDB_API_KEY = "5db7a6a7dbb93e9e885307f0f84fb0ef";
+        const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+        const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+
+        // Indian Language Codes
+        const INDIAN_LANGUAGES = {
+            'tamil': 'ta',
+            'hindi': 'hi', 
+            'telugu': 'te',
+            'malayalam': 'ml',
+            'kannada': 'kn',
+            'bengali': 'bn',
+            'marathi': 'mr',
+            'gujarati': 'gu',
+            'punjabi': 'pa'
+        };
+
+        // Popular Indian Actors Database
+        const INDIAN_ACTORS = {
+            // Tamil
+            'vijay': { id: 1172478, name: 'Vijay', type: 'actor', lang: 'ta' },
+            'ajith': { id: 1172479, name: 'Ajith Kumar', type: 'actor', lang: 'ta' },
+            'rajinikanth': { id: 1172492, name: 'Rajinikanth', type: 'actor', lang: 'ta' },
+            'kamal haasan': { id: 1172493, name: 'Kamal Haasan', type: 'actor', lang: 'ta' },
+            'dhanush': { id: 1172495, name: 'Dhanush', type: 'actor', lang: 'ta' },
+            'vijay sethupathi': { id: 1172500, name: 'Vijay Sethupathi', type: 'actor', lang: 'ta' },
+            'suriya': { id: 1172496, name: 'Suriya', type: 'actor', lang: 'ta' },
+            'sivakarthikeyan': { id: 1172498, name: 'Sivakarthikeyan', type: 'actor', lang: 'ta' },
+            
+            // Telugu
+            'prabhas': { id: 1172505, name: 'Prabhas', type: 'actor', lang: 'te' },
+            'allu arjun': { id: 1215381, name: 'Allu Arjun', type: 'actor', lang: 'te' },
+            'ram charan': { id: 1172506, name: 'Ram Charan', type: 'actor', lang: 'te' },
+            'ntr': { id: 1172507, name: 'N.T. Rama Rao Jr.', type: 'actor', lang: 'te' },
+            'mahesh babu': { id: 1172508, name: 'Mahesh Babu', type: 'actor', lang: 'te' },
+            
+            // Hindi
+            'shah rukh khan': { id: 1172510, name: 'Shah Rukh Khan', type: 'actor', lang: 'hi' },
+            'salman khan': { id: 1172508, name: 'Salman Khan', type: 'actor', lang: 'hi' },
+            'aamir khan': { id: 1172511, name: 'Aamir Khan', type: 'actor', lang: 'hi' },
+            'hrithik roshan': { id: 1172512, name: 'Hrithik Roshan', type: 'actor', lang: 'hi' },
+            'akshay kumar': { id: 1172513, name: 'Akshay Kumar', type: 'actor', lang: 'hi' },
+            
+            // Actresses
+            'nayanthara': { id: 1172501, name: 'Nayanthara', type: 'actress', lang: 'ta' },
+            'samantha': { id: 1172502, name: 'Samantha Ruth Prabhu', type: 'actress', lang: 'ta' },
+            'rashmika': { id: 2011102, name: 'Rashmika Mandanna', type: 'actress', lang: 'te' },
+            'deepika': { id: 1172507, name: 'Deepika Padukone', type: 'actress', lang: 'hi' },
+            'alia bhatt': { id: 1172514, name: 'Alia Bhatt', type: 'actress', lang: 'hi' },
+            
+            // Malayalam
+            'mohanlal': { id: 1172520, name: 'Mohanlal', type: 'actor', lang: 'ml' },
+            'mammootty': { id: 1172521, name: 'Mammootty', type: 'actor', lang: 'ml' },
+            'fahadh faasil': { id: 1172522, name: 'Fahadh Faasil', type: 'actor', lang: 'ml' },
+            
+            // Kannada
+            'yash': { id: 1172506, name: 'Yash', type: 'actor', lang: 'kn' },
+            'punith raj': { id: 1172523, name: 'Punith Rajkumar', type: 'actor', lang: 'kn' }
+        };
+
+        // Mood detection
+        const MOOD_KEYWORDS = {
+            "romantic": ["love", "romantic", "romance", "heart", "couple"],
+            "action": ["action", "fight", "adventure", "thriller", "exciting"],
+            "comedy": ["comedy", "funny", "humor", "laugh", "comic"],
+            "drama": ["drama", "emotional", "serious", "family", "life"],
+            "horror": ["horror", "scary", "fright", "terror", "ghost"],
+            "sci-fi": ["sci-fi", "science fiction", "future", "space", "alien"],
+            "thriller": ["thriller", "suspense", "mystery", "crime", "investigation"]
+        };
+
+        // Current search state
+        let currentSearch = {
+            query: '',
+            type: 'general',
+            mood: null,
+            language: null,
+            year: null,
+            actor: null,
+            results: [],
+            currentTrailer: null
+        };
+
+        // Cache
+        const searchCache = new Map();
+        const trailerCache = new Map();
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+        });
+
+        function initializePage() {
+            setupEventListeners();
+            getSearchQueryFromURL();
+            initializeTrailerModal();
+        }
+
+        function setupEventListeners() {
+            document.getElementById('search-btn').addEventListener('click', performNewSearch);
+            document.getElementById('search-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performNewSearch();
+            });
+
+            document.getElementById('closeTrailer').addEventListener('click', closeTrailerModal);
+            document.getElementById('trailerModal').addEventListener('click', function(e) {
+                if (e.target === this) closeTrailerModal();
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeTrailerModal();
+            });
+        }
+
+        function getSearchQueryFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentSearch.query = urlParams.get('q') || '';
+            
+            if (!currentSearch.query) {
+                showNoResults('Please enter a search query');
+                return;
+            }
+            
+            document.getElementById('search-query-display').textContent = currentSearch.query;
+            document.getElementById('search-input').value = currentSearch.query;
+            
+            performSmartSearch();
+        }
+
+        function performNewSearch() {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) return;
+            
+            window.location.href = `/search-results?q=${encodeURIComponent(query)}`;
+        }
+
+        // SMART QUERY ANALYSIS
+        function analyzeQuery(query) {
+            const lowerQuery = query.toLowerCase().trim();
+            
+            // Reset
+            currentSearch.type = 'general';
+            currentSearch.mood = null;
+            currentSearch.language = null;
+            currentSearch.year = null;
+            currentSearch.actor = null;
+            
+            // Check for actor first
+            for (const [actorKey, actorInfo] of Object.entries(INDIAN_ACTORS)) {
+                if (lowerQuery.includes(actorKey)) {
+                    currentSearch.actor = actorInfo;
+                    currentSearch.type = actorInfo.type; // 'actor' or 'actress'
+                    currentSearch.language = actorInfo.lang;
+                    break;
+                }
+            }
+            
+            // Check for language
+            if (!currentSearch.actor) {
+                for (const [langName, langCode] of Object.entries(INDIAN_LANGUAGES)) {
+                    if (lowerQuery.includes(langName)) {
+                        currentSearch.language = langCode;
+                        currentSearch.type = 'language';
+                        break;
+                    }
+                }
+            }
+            
+            // Check for year
+            const yearMatch = lowerQuery.match(/\b(19\d{2}|20[0-9]{2})\b/);
+            if (yearMatch) {
+                currentSearch.year = yearMatch[0];
+                if (currentSearch.type === 'language') {
+                    currentSearch.type = 'language-year';
+                } else if (!currentSearch.type.includes('actor')) {
+                    currentSearch.type = 'year';
+                }
+            }
+            
+            // Check for mood
+            for (const [mood, keywords] of Object.entries(MOOD_KEYWORDS)) {
+                if (keywords.some(keyword => lowerQuery.includes(keyword))) {
+                    currentSearch.mood = mood;
+                    if (currentSearch.type === 'general') {
+                        currentSearch.type = 'mood';
+                    }
+                    break;
+                }
+            }
+            
+            updateSearchUI();
+        }
+
+        function updateSearchUI() {
+            const badge = document.getElementById('search-type-badge');
+            const badgeText = document.getElementById('search-type-text');
+            const moodBox = document.getElementById('mood-detection');
+            
+            if (currentSearch.type !== 'general') {
+                let displayText = '';
+                const moodIcon = document.querySelector('.mood-icon i');
+                
+                switch(currentSearch.type) {
+                    case 'actor':
+                    case 'actress':
+                        displayText = `${currentSearch.type.charAt(0).toUpperCase() + currentSearch.type.slice(1)}: ${currentSearch.actor.name}`;
+                        moodIcon.className = "fas fa-user";
+                        moodBox.style.display = 'flex';
+                        document.getElementById('detected-mood').textContent = `${currentSearch.actor.name} movies`;
+                        document.getElementById('mood-tag').textContent = currentSearch.actor.name.split(' ')[0];
+                        break;
+                    case 'language':
+                        const langName = Object.keys(INDIAN_LANGUAGES).find(key => INDIAN_LANGUAGES[key] === currentSearch.language);
+                        displayText = `Language: ${langName ? langName.charAt(0).toUpperCase() + langName.slice(1) : 'Indian'}`;
+                        moodBox.style.display = 'none';
+                        break;
+                    case 'year':
+                        displayText = `Year: ${currentSearch.year}`;
+                        moodBox.style.display = 'none';
+                        break;
+                    case 'language-year':
+                        const langName2 = Object.keys(INDIAN_LANGUAGES).find(key => INDIAN_LANGUAGES[key] === currentSearch.language);
+                        displayText = `${langName2 ? langName2.charAt(0).toUpperCase() + langName2.slice(1) : ''} ${currentSearch.year} Movies`;
+                        moodBox.style.display = 'none';
+                        break;
+                    case 'mood':
+                        displayText = `Mood: ${currentSearch.mood.charAt(0).toUpperCase() + currentSearch.mood.slice(1)}`;
+                        moodIcon.className = getMoodIcon(currentSearch.mood);
+                        moodBox.style.display = 'flex';
+                        document.getElementById('detected-mood').textContent = currentSearch.mood;
+                        document.getElementById('mood-tag').textContent = currentSearch.mood.charAt(0).toUpperCase() + currentSearch.mood.slice(1);
+                        break;
+                }
+                
+                badgeText.textContent = displayText;
+                badge.style.display = 'inline-flex';
+            } else {
+                badge.style.display = 'none';
+                moodBox.style.display = 'none';
+            }
+        }
+
+        function getMoodIcon(mood) {
+            const iconMap = {
+                'romantic': 'fa-heart',
+                'action': 'fa-fist-raised',
+                'comedy': 'fa-laugh',
+                'drama': 'fa-theater-masks',
+                'horror': 'fa-ghost',
+                'sci-fi': 'fa-rocket',
+                'thriller': 'fa-bolt'
+            };
+            return `fas ${iconMap[mood] || 'fa-film'}`;
+        }
+
+        // MAIN SEARCH FUNCTION
+        async function performSmartSearch() {
+            showLoading();
+            
+            try {
+                analyzeQuery(currentSearch.query);
+                
+                let results = [];
+                
+                // Route based on search type
+                switch(currentSearch.type) {
+                    case 'actor':
+                    case 'actress':
+                        results = await searchByActor();
+                        break;
+                    case 'language-year':
+                        results = await searchByLanguageAndYear();
+                        break;
+                    case 'language':
+                        results = await searchByLanguage();
+                        break;
+                    case 'year':
+                        results = await searchByYear();
+                        break;
+                    case 'mood':
+                        results = await searchByMood();
+                        break;
+                    default:
+                        results = await searchGeneral();
+                }
+                
+                // Fallback if no results
+                if (results.length === 0) {
+                    results = await searchGeneral();
+                }
+                
+                currentSearch.results = results;
+                displayResults();
+                loadSuggestions();
+                
+            } catch (error) {
+                console.error('Search error:', error);
+                showError('Search failed. Please try again.');
+            }
+        }
+
+        // ACTOR SEARCH - IMPROVED
+        async function searchByActor() {
+            if (!currentSearch.actor) return [];
+            
+            try {
+                const actorId = currentSearch.actor.id;
+                const actorName = currentSearch.actor.name;
+                
+                // Get actor's filmography
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/person/${actorId}/combined_credits?api_key=${TMDB_API_KEY}`
+                );
+                
+                const data = await response.json();
+                
+                if (data.cast && data.cast.length > 0) {
+                    // Filter and prioritize
+                    let movies = data.cast.filter(item => 
+                        (item.media_type === 'movie' || item.media_type === 'tv') &&
+                        item.vote_count > 10 // Only include movies with some votes
+                    );
+                    
+                    // Sort by popularity and relevance
+                    movies.sort((a, b) => {
+                        // Prioritize movies where actor is lead (character not empty)
+                        const aScore = (a.character ? 100 : 0) + (b.popularity || 0);
+                        const bScore = (b.character ? 100 : 0) + (a.popularity || 0);
+                        return bScore - aScore;
+                    });
+                    
+                    // Take top 20
+                    movies = movies.slice(0, 20);
+                    
+                    return movies.map(item => ({
+                        id: item.id,
+                        title: item.title || item.name,
+                        year: item.release_date ? item.release_date.substring(0, 4) : 
+                              (item.first_air_date ? item.first_air_date.substring(0, 4) : 'N/A'),
+                        rating: item.vote_average ? item.vote_average.toFixed(1) : 'N/A',
+                        poster: item.poster_path ? TMDB_IMAGE_BASE + item.poster_path : getDefaultPoster(),
+                        overview: item.overview || '',
+                        type: item.media_type,
+                        popularity: item.popularity || 0,
+                        character: item.character || '',
+                        language: item.original_language,
+                        actorName: actorName
+                    }));
+                }
+                
+                return [];
+                
+            } catch (error) {
+                console.error('Actor search error:', error);
+                return [];
+            }
+        }
+
+        // LANGUAGE + YEAR SEARCH - FIXED for "tamil 2025"
+        async function searchByLanguageAndYear() {
+            if (!currentSearch.language || !currentSearch.year) return [];
+            
+            try {
+                const year = parseInt(currentSearch.year);
+                const currentYear = new Date().getFullYear();
+                
+                console.log(`Searching: ${currentSearch.language} movies from ${year}`);
+                
+                let results = [];
+                
+                // Strategy 1: Search for movies from specific year and language
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}` +
+                    `&with_original_language=${currentSearch.language}` +
+                    `&primary_release_year=${year}` +
+                    `&sort_by=popularity.desc` +
+                    `&page=1` +
+                    `&include_adult=false`
+                );
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    results = data.results.map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        year: year.toString(),
+                        rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                        poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : getDefaultPoster(),
+                        overview: movie.overview || 'Description not available',
+                        type: 'movie',
+                        popularity: movie.popularity || 0,
+                        language: movie.original_language,
+                        release_date: movie.release_date
+                    }));
+                }
+                
+                // Strategy 2: If no results for exact year, search upcoming movies
+                if (results.length === 0 && year >= currentYear) {
+                    results = await searchUpcomingMovies(currentSearch.language, year);
+                }
+                
+                // Strategy 3: If still no results, show latest movies from that language
+                if (results.length === 0) {
+                    results = await searchLatestMoviesByLanguage(currentSearch.language);
+                }
+                
+                // Strategy 4: Fallback - search by keyword
+                if (results.length === 0) {
+                    const langName = Object.keys(INDIAN_LANGUAGES).find(key => INDIAN_LANGUAGES[key] === currentSearch.language);
+                    if (langName) {
+                        results = await searchGeneral(`${langName} movies ${year}`);
+                    }
+                }
+                
+                return results.slice(0, 20);
+                
+            } catch (error) {
+                console.error('Language+Year search error:', error);
+                return [];
+            }
+        }
+
+        async function searchUpcomingMovies(languageCode, year) {
+            try {
+                const currentYear = new Date().getFullYear();
+                
+                // For Tamil 2025, we need to search for upcoming movies
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}` +
+                    `&with_original_language=${languageCode}` +
+                    `&sort_by=popularity.desc` +
+                    `&page=1` +
+                    `&include_adult=false`
+                );
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    // Filter for upcoming or recent movies
+                    const filtered = data.results.filter(movie => {
+                        if (!movie.release_date) return false;
+                        const movieYear = parseInt(movie.release_date.substring(0, 4));
+                        return movieYear >= currentYear - 1; // Include last year and upcoming
+                    });
+                    
+                    return filtered.map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        year: movie.release_date ? movie.release_date.substring(0, 4) : year.toString(),
+                        rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                        poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : getDefaultPoster(),
+                        overview: movie.overview || 'Upcoming movie',
+                        type: 'movie',
+                        popularity: movie.popularity || 0,
+                        language: movie.original_language,
+                        release_date: movie.release_date,
+                        isUpcoming: true
+                    }));
+                }
+                
+                return [];
+                
+            } catch (error) {
+                console.error('Upcoming movies search error:', error);
+                return [];
+            }
+        }
+
+        async function searchLatestMoviesByLanguage(languageCode) {
+            try {
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}` +
+                    `&with_original_language=${languageCode}` +
+                    `&sort_by=release_date.desc` +
+                    `&page=1` +
+                    `&include_adult=false`
+                );
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    return data.results.slice(0, 20).map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        year: movie.release_date ? movie.release_date.substring(0, 4) : 'N/A',
+                        rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                        poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : getDefaultPoster(),
+                        overview: movie.overview || '',
+                        type: 'movie',
+                        popularity: movie.popularity || 0,
+                        language: movie.original_language
+                    }));
+                }
+                
+                return [];
+                
+            } catch (error) {
+                console.error('Latest movies search error:', error);
+                return [];
+            }
+        }
+
+        async function searchByLanguage() {
+            if (!currentSearch.language) return await searchGeneral();
+            
+            try {
+                // Get language name for search
+                const langName = Object.keys(INDIAN_LANGUAGES).find(key => INDIAN_LANGUAGES[key] === currentSearch.language);
+                
+                // Search for popular movies in that language
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}` +
+                    `&with_original_language=${currentSearch.language}` +
+                    `&sort_by=popularity.desc` +
+                    `&page=1` +
+                    `&include_adult=false`
+                );
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    return data.results.slice(0, 20).map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        year: movie.release_date ? movie.release_date.substring(0, 4) : 'N/A',
+                        rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                        poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : getDefaultPoster(),
+                        overview: movie.overview || '',
+                        type: 'movie',
+                        popularity: movie.popularity || 0,
+                        language: movie.original_language
+                    }));
+                }
+                
+                return [];
+                
+            } catch (error) {
+                console.error('Language search error:', error);
+                return await searchGeneral();
+            }
+        }
+
+        async function searchByYear() {
+            if (!currentSearch.year) return [];
+            
+            try {
+                const year = parseInt(currentSearch.year);
+                const currentYear = new Date().getFullYear();
+                
+                if (year > currentYear + 2 || year < 1900) {
+                    return await searchGeneral();
+                }
+                
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}` +
+                    `&primary_release_year=${year}` +
+                    `&sort_by=popularity.desc` +
+                    `&page=1` +
+                    `&include_adult=false`
+                );
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    return data.results.slice(0, 20).map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        year: year.toString(),
+                        rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                        poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : getDefaultPoster(),
+                        overview: movie.overview || '',
+                        type: 'movie',
+                        popularity: movie.popularity || 0,
+                        language: movie.original_language
+                    }));
+                }
+                
+                return [];
+                
+            } catch (error) {
+                console.error('Year search error:', error);
+                return [];
+            }
+        }
+
+        async function searchByMood() {
+            if (!currentSearch.mood) return await searchGeneral();
+            
+            // Map mood to genre ID
+            const moodToGenre = {
+                'romantic': 10749,
+                'action': 28,
+                'comedy': 35,
+                'drama': 18,
+                'horror': 27,
+                'sci-fi': 878,
+                'thriller': 53
+            };
+            
+            const genreId = moodToGenre[currentSearch.mood];
+            if (!genreId) return await searchGeneral();
+            
+            try {
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/discover/movie?api_key=${TMDB_API_KEY}` +
+                    `&with_genres=${genreId}` +
+                    `&sort_by=popularity.desc` +
+                    `&page=1` +
+                    `&include_adult=false`
+                );
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    return data.results.slice(0, 20).map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        year: movie.release_date ? movie.release_date.substring(0, 4) : 'N/A',
+                        rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                        poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : getDefaultPoster(),
+                        overview: movie.overview || '',
+                        type: 'movie',
+                        popularity: movie.popularity || 0,
+                        language: movie.original_language,
+                        mood: currentSearch.mood
+                    }));
+                }
+                
+                return [];
+                
+            } catch (error) {
+                console.error('Mood search error:', error);
+                return await searchGeneral();
+            }
+        }
+
+        async function searchGeneral() {
+            try {
+                const [moviesResponse, tvResponse] = await Promise.all([
+                    fetch(`${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(currentSearch.query)}&page=1`),
+                    fetch(`${TMDB_BASE_URL}/search/tv?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(currentSearch.query)}&page=1`)
+                ]);
+                
+                const moviesData = await moviesResponse.json();
+                const tvData = await tvResponse.json();
+                
+                let allResults = [];
+                
+                if (moviesData.results) {
+                    allResults = moviesData.results.map(movie => ({
+                        id: movie.id,
+                        title: movie.title,
+                        year: movie.release_date ? movie.release_date.substring(0, 4) : 'N/A',
+                        rating: movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A',
+                        poster: movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : getDefaultPoster(),
+                        overview: movie.overview || '',
+                        type: 'movie',
+                        popularity: movie.popularity || 0,
+                        language: movie.original_language
+                    }));
+                }
+                
+                if (tvData.results) {
+                    const tvResults = tvData.results.map(tv => ({
+                        id: tv.id,
+                        title: tv.name,
+                        year: tv.first_air_date ? tv.first_air_date.substring(0, 4) : 'N/A',
+                        rating: tv.vote_average ? tv.vote_average.toFixed(1) : 'N/A',
+                        poster: tv.poster_path ? TMDB_IMAGE_BASE + tv.poster_path : getDefaultPoster(),
+                        overview: tv.overview || '',
+                        type: 'tv',
+                        popularity: tv.popularity || 0,
+                        language: tv.original_language
+                    }));
+                    allResults = [...allResults, ...tvResults];
+                }
+                
+                allResults.sort((a, b) => b.popularity - a.popularity);
+                return allResults.slice(0, 20);
+                
+            } catch (error) {
+                console.error('General search error:', error);
+                return [];
+            }
+        }
+
+        // TRAILER FUNCTIONS
+        function initializeTrailerModal() {
+            // Already initialized
+        }
+
+        async function showTrailer(movieId, movieTitle, movieType = 'movie') {
+            currentSearch.currentTrailer = { id: movieId, title: movieTitle, type: movieType };
+            
+            document.getElementById('trailerMovieTitle').textContent = `${movieTitle} - Trailer`;
+            
+            const trailerContent = document.getElementById('trailerContent');
+            trailerContent.innerHTML = `
+                <div class="loading-trailer">
+                    <div class="loader"></div>
+                    <p>Loading trailer...</p>
+                </div>
+            `;
+            
+            document.getElementById('trailerModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            await loadTrailer(movieId, movieTitle, movieType);
+        }
+
+        async function loadTrailer(movieId, movieTitle, movieType) {
+            const trailerContent = document.getElementById('trailerContent');
+            
+            try {
+                // Try TMDB videos API
+                const response = await fetch(
+                    `${TMDB_BASE_URL}/${movieType}/${movieId}/videos?api_key=${TMDB_API_KEY}`
+                );
+                
+                const data = await response.json();
+                
+                if (data.results && data.results.length > 0) {
+                    // Find YouTube trailer
+                    const trailer = data.results.find(video => 
+                        (video.type === 'Trailer' || video.type === 'Teaser') && 
+                        video.site === 'YouTube'
+                    );
+                    
+                    if (trailer) {
+                        trailerContent.innerHTML = `
+                            <div class="trailer-video">
+                                <iframe src="https://www.youtube.com/embed/${trailer.key}" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div style="margin-top: 1rem; color: #8a8fa3; font-size: 0.9rem;">
+                                Source: <span class="trailer-source">YouTube</span>
+                            </div>
+                        `;
+                        return;
+                    }
+                }
+                
+                // If no trailer found
+                showTrailerFallback(movieTitle);
+                
+            } catch (error) {
+                console.error('Trailer loading error:', error);
+                showTrailerFallback(movieTitle);
+            }
+        }
+
+        function showTrailerFallback(movieTitle) {
+            const trailerContent = document.getElementById('trailerContent');
+            
+            trailerContent.innerHTML = `
+                <div class="trailer-fallback">
+                    <i class="fas fa-film" style="font-size: 3rem; color: #8a8fa3; margin-bottom: 1rem;"></i>
+                    <h3>Trailer Not Available</h3>
+                    <p>Search for "${movieTitle}" trailer on:</p>
+                    
+                    <div class="trailer-fallback-links">
+                        <a href="https://www.youtube.com/results?search_query=${encodeURIComponent(movieTitle + ' official trailer')}" 
+                           target="_blank" class="trailer-link">
+                            <i class="fab fa-youtube"></i> YouTube
+                        </a>
+                        <a href="https://www.google.com/search?q=${encodeURIComponent(movieTitle + ' trailer')}" 
+                           target="_blank" class="trailer-link">
+                            <i class="fab fa-google"></i> Google
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function closeTrailerModal() {
+            document.getElementById('trailerModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            const iframe = document.querySelector('.trailer-video iframe');
+            if (iframe) {
+                iframe.src = iframe.src;
+            }
+        }
+
+        // DISPLAY FUNCTIONS
+        function showLoading() {
+            document.getElementById('movies-grid').innerHTML = `
+                <div class="loading" style="grid-column: 1/-1;">
+                    <div class="loader"></div>
+                    <p style="margin-top: 1rem; color: #8a8fa3;">Searching for: "${currentSearch.query}"</p>
+                </div>
+            `;
+        }
+
+        function displayResults() {
+            const container = document.getElementById('movies-grid');
+            const countElement = document.getElementById('results-count');
+            
+            if (!currentSearch.results || currentSearch.results.length === 0) {
+                showNoResults(`No results found for "${currentSearch.query}"`);
+                return;
+            }
+            
+            countElement.textContent = `Found ${currentSearch.results.length} results`;
+            
+            container.innerHTML = '';
+            
+            currentSearch.results.forEach(item => {
+                const card = createMovieCard(item);
+                container.appendChild(card);
+            });
+        }
+
+        function createMovieCard(item) {
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+            
+            card.onclick = (e) => {
+                if (!e.target.closest('.movie-card-actions') && !e.target.closest('.watch-trailer-btn')) {
+                    window.location.href = `/movie-details?id=${item.id}&type=${item.type}`;
+                }
+            };
+            
+            const languageName = getLanguageName(item.language);
+            const languageBadge = languageName ? 
+                `<span class="language-badge">${languageName}</span>` : '';
+            
+            const ratingColor = getRatingColor(item.rating);
+            const yearBadge = item.year !== 'N/A' ? 
+                `<span class="year-badge">${item.year}</span>` : '';
+            
+            card.innerHTML = `
+                <img src="${item.poster}" alt="${item.title}" class="movie-card-poster" 
+                     onerror="this.src='${getDefaultPoster()}'">
+                
+                <div class="movie-card-actions">
+                    <div class="action-icon" onclick="event.stopPropagation(); addToWatchlist(${item.id}, '${item.title}')">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="action-icon" onclick="event.stopPropagation(); showTrailer(${item.id}, '${item.title}', '${item.type}')">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                
+                <button class="watch-trailer-btn" onclick="event.stopPropagation(); showTrailer(${item.id}, '${item.title}', '${item.type}')">
+                    <i class="fas fa-play-circle"></i> Watch Trailer
+                </button>
+                
+                <div class="movie-card-info">
+                    <h3 class="movie-card-title">${item.title}</h3>
+                    <div class="movie-card-details">
+                        <span class="movie-year">${item.year}</span>
+                        <span class="movie-rating" style="color: ${ratingColor}">⭐ ${item.rating}</span>
+                        <span class="movie-type" style="color: ${item.type === 'tv' ? '#ff2a6d' : '#05d9e8'}">
+                            ${item.type === 'tv' ? 'TV Show' : 'Movie'}
+                        </span>
+                        ${languageBadge}
+                        ${yearBadge}
+                    </div>
+                    ${item.character ? `<div class="character-badge">as ${item.character}</div>` : ''}
+                    ${item.actorName ? `<div style="color: #05d9e8; font-size: 0.8rem; margin-top: 0.3rem;">
+                        <i class="fas fa-user"></i> ${item.actorName}
+                    </div>` : ''}
+                    <p style="color: #8a8fa3; font-size: 0.8rem; margin-top: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        ${item.overview}
+                    </p>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function getLanguageName(code) {
+            const languages = {
+                'en': 'English',
+                'hi': 'Hindi',
+                'ta': 'Tamil',
+                'te': 'Telugu',
+                'ml': 'Malayalam',
+                'kn': 'Kannada',
+                'bn': 'Bengali',
+                'mr': 'Marathi',
+                'gu': 'Gujarati',
+                'pa': 'Punjabi',
+                'es': 'Spanish',
+                'fr': 'French',
+                'de': 'German',
+                'ja': 'Japanese',
+                'ko': 'Korean',
+                'zh': 'Chinese'
+            };
+            return languages[code] || null;
+        }
+
+        function getRatingColor(rating) {
+            if (rating === 'N/A') return '#8a8fa3';
+            const numRating = parseFloat(rating);
+            if (numRating >= 7.5) return '#00ff00';
+            if (numRating >= 6.0) return '#ffff00';
+            if (numRating >= 4.0) return '#ff9900';
+            return '#ff0000';
+        }
+
+        function getDefaultPoster() {
+            return 'https://via.placeholder.com/200x300/0a0a16/ffffff?text=No+Image';
+        }
+
+        function showNoResults(message) {
+            document.getElementById('movies-grid').innerHTML = `
+                <div class="no-results" style="grid-column: 1/-1;">
+                    <i class="fas fa-search"></i>
+                    <h3>${message}</h3>
+                    <button class="action-btn" onclick="window.location.href='/home'" 
+                            style="margin-top: 1rem; background: linear-gradient(45deg, #ff2a6d, #05d9e8); color: white;">
+                        <i class="fas fa-home"></i> Back to Home
+                    </button>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('movies-grid').innerHTML = `
+                <div class="error-message" style="grid-column: 1/-1;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>${message}</h3>
+                    <button class="action-btn" onclick="window.location.reload()" 
+                            style="margin-top: 1rem; background: linear-gradient(45deg, #ff2a6d, #05d9e8); color: white;">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                </div>
+            `;
+        }
+
+        function loadSuggestions() {
+            const suggestions = generateSuggestions();
+            const container = document.getElementById('suggestions');
+            
+            container.innerHTML = '';
+            suggestions.forEach(suggestion => {
+                const tag = document.createElement('span');
+                tag.className = 'suggestion-tag';
+                tag.textContent = suggestion;
+                tag.onclick = () => {
+                    document.getElementById('search-input').value = suggestion;
+                    document.getElementById('search-btn').click();
+                };
+                container.appendChild(tag);
+            });
+        }
+
+        function generateSuggestions() {
+            const baseQuery = currentSearch.query.toLowerCase();
+            const suggestions = [];
+            
+            if (currentSearch.language) {
+                const langName = Object.keys(INDIAN_LANGUAGES).find(key => INDIAN_LANGUAGES[key] === currentSearch.language);
+                if (langName) {
+                    suggestions.push(`${langName} movies 2024`);
+                    suggestions.push(`Latest ${langName} movies`);
+                    suggestions.push(`Popular ${langName} movies`);
+                }
+            }
+            
+            if (currentSearch.year) {
+                suggestions.push(`Movies ${currentSearch.year}`);
+                suggestions.push(`Latest movies ${parseInt(currentSearch.year) - 1}`);
+            }
+            
+            if (currentSearch.actor) {
+                suggestions.push(`${currentSearch.actor.name} latest movies`);
+                suggestions.push(`${currentSearch.actor.name} popular movies`);
+            }
+            
+            // Default suggestions
+            if (suggestions.length === 0) {
+                suggestions.push('Popular movies 2024');
+                suggestions.push('Action movies');
+                suggestions.push('Comedy movies');
+                suggestions.push('Romantic movies');
+                suggestions.push('Tamil movies');
+                suggestions.push('Hindi movies');
+            }
+            
+            return suggestions.slice(0, 6);
+        }
+
+        function filterResults(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (!currentSearch.results || currentSearch.results.length === 0) return;
+            
+            let filtered = [...currentSearch.results];
+            
+            switch(type) {
+                case 'movie':
+                    filtered = filtered.filter(item => item.type === 'movie');
+                    break;
+                case 'tv':
+                    filtered = filtered.filter(item => item.type === 'tv');
+                    break;
+                case 'popular':
+                    filtered.sort((a, b) => b.popularity - a.popularity);
+                    break;
+                case 'recent':
+                    filtered.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+                    break;
+            }
+            
+            const container = document.getElementById('movies-grid');
+            container.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results" style="grid-column: 1/-1;">
+                        <i class="fas fa-filter"></i>
+                        <h3>No results match this filter</h3>
+                    </div>
+                `;
+                return;
+            }
+            
+            filtered.forEach(item => {
+                const card = createMovieCard(item);
+                container.appendChild(card);
+            });
+        }
+
+        function addToWatchlist(id, title) {
+            showNotification(`"${title}" added to watchlist!`);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

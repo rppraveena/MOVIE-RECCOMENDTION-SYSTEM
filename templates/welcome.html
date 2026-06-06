@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineSoul - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a16 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .welcome-container {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        /* Background Image with Transparency */
+.sliding-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image: url('{{ url_for("static", filename="img/img1.jpg") }}');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35; /* transparent effect */
+    animation: slide 25s linear infinite;
+    filter: blur(2px); /* smooth bg – text unaffected */
+}
+        /* Fallback background if image doesn't load */
+        .background-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a16 0%, #1a1a2e 50%, #16213e 100%);
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .logo {
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .logo p {
+            font-size: 1.1rem;
+            color: #d1f7ff;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #8a8fa3;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature h3 {
+            margin-bottom: 0.8rem;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .feature p {
+            color: #8a8fa3;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Floating animation */
+@keyframes slide {
+    0% { transform: scale(1) translateX(0); }
+    50% { transform: scale(1.05) translateX(-25px); }
+    100% { transform: scale(1) translateX(0); }
+}
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .welcome-container {
+                padding: 1rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .logo h1 {
+                font-size: 2.5rem;
+            }
+            
+            .logo p {
+                font-size: 1rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            .feature {
+                padding: 1rem;
+            }
+            
+            .feature i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <!-- Background Image -->
+   <div class="sliding-bg"></div>
+
+        
+        <div class="content">
+            <div class="logo floating">
+                <h1>CineSoul</h1>
+                <p>Dreams and anguish bring us together 💙</p>
+            </div>
+            
+            <div class="tagline">
+                Find movies that match your vibe ❤️
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-heart"></i>
+                    <h3>Mood-Based</h3>
+                    <p>Discover movies based on your current mood and emotions</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Powered</h3>
+                    <p>Smart recommendations using artificial intelligence</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-film"></i>
+                    <h3>Personalized</h3>
+                    <p>Tailored suggestions just for your taste</p>
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="{{ url_for('login') }}" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Get Started
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

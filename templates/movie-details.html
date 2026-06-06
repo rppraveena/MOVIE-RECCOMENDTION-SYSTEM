@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineSoul - Movie Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #0a0a16;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========== BACKGROUND EFFECTS ========== */
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #ff2a6d;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: #05d9e8;
+            top: 60%;
+            left: 70%;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: #d1f7ff;
+            top: 30%;
+            left: 80%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(40px, -60px) rotate(120deg); }
+            66% { transform: translate(-30px, 30px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .navbar {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(5, 217, 232, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .search-box {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
+
+        .search-btn {
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            opacity: 0.9;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            padding: 120px 2rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* ========== MOVIE DETAILS HERO ========== */
+        .movie-hero {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(5, 217, 232, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .movie-poster-large {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .movie-poster-large img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .movie-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .movie-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .movie-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            color: #8a8fa3;
+        }
+
+        .movie-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .movie-genres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .genre-tag {
+            background: rgba(5, 217, 232, 0.2);
+            color: #05d9e8;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .movie-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-width: 120px;
+        }
+
+        .action-btn:hover {
+            background: rgba(5, 217, 232, 0.2);
+            border-color: rgba(5, 217, 232, 0.5);
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            border: none;
+            color: white;
+        }
+
+        .watchlist-btn.active {
+            background: rgba(255, 42, 109, 0.2);
+            border-color: rgba(255, 42, 109, 0.5);
+            color: #ff2a6d;
+        }
+
+        /* ========== USER RATING SECTION ========== */
+        .user-rating-section {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: #8a8fa3;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        .star:hover ~ .star {
+            color: #8a8fa3;
+        }
+
+        .rating-text {
+            color: #05d9e8;
+            font-weight: 600;
+            min-width: 100px;
+        }
+
+        .rating-count {
+            color: #8a8fa3;
+            font-size: 0.9rem;
+        }
+
+        /* ========== MOVIE OVERVIEW ========== */
+        .movie-overview {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #05d9e8;
+        }
+
+        .overview-text {
+            line-height: 1.8;
+            color: #d1f7ff;
+            font-size: 1.1rem;
+        }
+
+        .movie-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        .detail-label {
+            color: #8a8fa3;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* ========== CAST & CREW ========== */
+        .cast-crew-section {
+            margin-bottom: 3rem;
+        }
+
+        .cast-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cast-card {
+            background: rgba(10, 25, 47, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cast-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(5, 217, 232, 0.5);
+        }
+
+        .cast-photo {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .cast-info {
+            padding: 1rem;
+        }
+
+        .cast-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .cast-character {
+            color: #8a8fa3;
+            font-size: 0.9rem;
+        }
+
+        /* ========== SIMILAR MOVIES ========== */
+        .similar-movies-section {
+            margin-bottom: 3rem;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .movie-card {
+            background: rgba(10, 25, 47, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(5, 217, 232, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .movie-card:hover .movie-poster {
+            transform: scale(1.05);
+        }
+
+        .movie-card-info {
+            padding: 1rem;
+        }
+
+        .movie-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-card-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #8a8fa3;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .movie-card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(5, 217, 232, 0.9);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* ========== TRAILER MODAL ========== */
+        .trailer-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .trailer-modal-content {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .trailer-modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .trailer-modal-title {
+            font-size: 1.5rem;
+            color: #05d9e8;
+        }
+
+        .close-trailer-modal {
+            background: none;
+            border: none;
+            color: #8a8fa3;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-trailer-modal:hover {
+            color: #ff2a6d;
+        }
+
+        .trailer-modal-body {
+            padding: 0;
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .trailer-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ========== MODALS ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: #05d9e8;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #8a8fa3;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #ff2a6d;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(5, 217, 232, 0.3);
+            padding: 3rem 2rem 2rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            padding: 1rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ff2a6d, #05d9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-section p {
+            color: #8a8fa3;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+            color: #8a8fa3;
+        }
+
+        .footer-section ul li a {
+            color: #8a8fa3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #05d9e8;
+        }
+
+        .footer-section ul li i {
+            margin-right: 10px;
+            color: #05d9e8;
+            width: 20px;
+            text-align: center;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8a8fa3;
+            font-size: 0.9rem;
+        }
+
+        .copyright p:first-child {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ========== LOADING STATES ========== */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid transparent;
+            border-top: 3px solid #05d9e8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+            
+            .search-container {
+                order: 3;
+                margin: 1rem 0 0;
+                max-width: 100%;
+            }
+            
+            .main-content {
+                padding: 160px 1rem 1rem;
+            }
+            
+            .movie-hero {
+                grid-template-columns: 1fr;
+            }
+            
+            .movie-poster-large {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            
+            .movie-title {
+                font-size: 2rem;
+                text-align: center;
+            }
+            
+            .movie-meta {
+                justify-content: center;
+            }
+            
+            .movie-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .rating-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .cast-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+            
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            .footer {
+                padding: 2rem 1rem 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .movie-title {
+                font-size: 1.8rem;
+            }
+            
+            .action-btn {
+                min-width: 100px;
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .star {
+                font-size: 1.5rem;
+            }
+            
+            .cast-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .movies-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-section h4 {
+                font-size: 1.2rem;
+            }
+            
+            .language-badge {
+                font-size: 0.6rem;
+                padding: 2px 6px;
+            }
+        }
+
+        /* ========== UTILITY CLASSES ========== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            z-index: 10000;
+            max-width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 90px;
+            left: 20px;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(5, 217, 232, 0.3);
+            color: #05d9e8;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.1);
+            border-color: #05d9e8;
+        }
+
+        /* ========== RATING STARS ========== */
+        .rating-stars {
+            display: inline-flex;
+            gap: 2px;
+            align-items: center;
+        }
+
+        .rating-stars .fa-star {
+            color: #FFD700;
+            font-size: 0.9rem;
+        }
+
+        .rating-stars .fa-star-half-alt {
+            color: #FFD700;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-btn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/home" style="text-decoration: none;">
+                <h1>CineSoul</h1>
+            </a>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="search-input" placeholder="Search movies, year, actor, mood, genre...">
+                <button class="search-btn" id="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="user-profile">
+            <div class="profile-pic" id="profile-pic" onclick="toggleProfileModal()">U</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Movie Hero Section -->
+        <section class="movie-hero" id="movie-hero">
+            <div class="loading">
+                <div class="loader"></div>
+                <p>Loading movie details...</p>
+            </div>
+        </section>
+
+        <!-- User Rating Section -->
+        <section class="user-rating-section" id="user-rating-section">
+            <div class="loading">
+                <div class="loader"></div>
+            </div>
+        </section>
+
+        <!-- Movie Overview -->
+        <section class="movie-overview" id="movie-overview">
+            <div class="loading">
+                <div class="loader"></div>
+            </div>
+        </section>
+
+        <!-- Cast & Crew -->
+        <section class="cast-crew-section" id="cast-crew-section">
+            <div class="loading">
+                <div class="loader"></div>
+            </div>
+        </section>
+
+        <!-- Similar Movies -->
+        <section class="similar-movies-section" id="similar-movies-section">
+            <div class="loading">
+                <div class="loader"></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Trailer Modal -->
+    <div class="trailer-modal" id="trailer-modal">
+        <div class="trailer-modal-content">
+            <div class="trailer-modal-header">
+                <h3 class="trailer-modal-title" id="trailer-modal-title">Trailer</h3>
+                <button class="close-trailer-modal" onclick="closeTrailerModal()">&times;</button>
+            </div>
+            <div class="trailer-modal-body">
+                <iframe id="trailer-video" class="trailer-video" 
+                        src="" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profile-modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Profile & Preferences</h3>
+                <button class="close-modal" onclick="toggleProfileModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div class="profile-pic" style="width: 80px; height: 80px; margin: 0 auto 1rem; font-size: 2rem;">
+                        U
+                    </div>
+                    <h3 id="profile-name">User Name</h3>
+                    <p id="profile-email" style="color: #8a8fa3;">user@example.com</p>
+                </div>
+                
+                <!-- Mood Preferences -->
+                <div style="margin-bottom: 1.5rem; padding: 15px; background: rgba(5, 217, 232, 0.1); border-radius: 10px;">
+                    <h4 style="color: #05d9e8; margin-bottom: 10px; font-size: 1rem;">
+                        <i class="fas fa-heartbeat"></i> Your Mood Profile
+                    </h4>
+                    <div id="mood-profile-stats">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Most Common Mood:</span>
+                            <span id="most-common-mood">None</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>Favorite Genre:</span>
+                            <span id="favorite-genre">None</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Mood Accuracy:</span>
+                            <span id="mood-accuracy">0%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span>Movies Watched</span>
+                        <span id="profile-watched">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span>Watchlist</span>
+                        <span id="profile-watchlist">0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Account Created</span>
+                        <span id="profile-created">2024-01-01</span>
+                    </div>
+                </div>
+                
+                <button class="action-btn" style="width: 100%; background: linear-gradient(45deg, #ff2a6d, #05d9e8); color: white; border: none;" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout to Welcome Page
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>CineSoul</h4>
+                <p>Dreams and anguish bring us together 💙</p>
+                <p>Find movies that match your vibe ❤️</p>
+                <p>Your personal movie recommendation platform</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" onclick="showFeedbackPopup()"><i class="fas fa-comment"></i> Feedback</a></li>
+                    <li><a href="#" onclick="showFeedbackPopup()"><i class="fas fa-bug"></i> Report Issue</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@cinesoul.com</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Chennai, India</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 CineSoul. All rights reserved. Made with ❤️ for movie lovers like you everywhere.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Powered by TMDB API • Data from The Movie Database</p>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript -->
+    <script>
+        // ========== CONFIGURATION ==========
+        const TMDB_API_KEYS = [
+            "5db7a6a7dbb93e9e885307f0f84fb0ef",
+            "b9b8d9a7dbb93e9e885307f0f84fb1ab",
+            "c0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5"
+        ];
+        let currentApiKeyIndex = 0;
+        
+        const TMDB_BASE_URL = "https://api.themoviedb.org/3";
+        const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+        const FALLBACK_IMAGE = "https://via.placeholder.com/200x300/0a0a16/ffffff?text=Movie";
+        const FALLBACK_CAST_IMAGE = "https://via.placeholder.com/150x225/0a0a16/ffffff?text=Actor";
+
+        // Genre names mapping
+        const genreNames = {
+            28: 'Action', 12: 'Adventure', 16: 'Animation', 35: 'Comedy',
+            80: 'Crime', 99: 'Documentary', 18: 'Drama', 10751: 'Family',
+            14: 'Fantasy', 36: 'History', 27: 'Horror', 10402: 'Music',
+            9648: 'Mystery', 10749: 'Romance', 878: 'Science Fiction',
+            10770: 'TV Movie', 53: 'Thriller', 10752: 'War', 37: 'Western'
+        };
+
+        // ========== GLOBAL VARIABLES ==========
+        let currentUser = null;
+        let currentMovieId = null;
+        let currentMovie = null;
+        let watchlist = [];
+        let userRatings = {}; // Temporary cache for user ratings
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('DOM Loaded - Initializing Movie Details Page...');
+            
+            // Check authentication
+            const userData = localStorage.getItem('currentUser');
+            if (!userData) {
+                window.location.href = '/login';
+                return;
+            }
+            
+            try {
+                currentUser = JSON.parse(userData);
+                console.log('User loaded:', currentUser.username);
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+                window.location.href = '/login';
+                return;
+            }
+
+            // Get movie ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            currentMovieId = urlParams.get('movie_id') || urlParams.get('id');
+            
+            if (!currentMovieId) {
+                showNotification('No movie ID provided. Redirecting to home...', 'error');
+                setTimeout(() => window.location.href = '/home', 2000);
+                return;
+            }
+
+            // Initialize user
+            initializeUser();
+            
+            // Load user data
+            loadUserData();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Load movie details
+            await loadMovieDetails();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification(`Welcome to movie details!`, 'success');
+            }, 1000);
+        });
+
+        // ========== USER MANAGEMENT ==========
+        function initializeUser() {
+            if (!currentUser) return;
+            
+            const initials = getInitials(currentUser.name || currentUser.username);
+            document.getElementById('profile-pic').textContent = initials;
+            document.querySelector('#profile-modal .profile-pic').textContent = initials;
+            
+            document.getElementById('profile-name').textContent = currentUser.name || currentUser.username;
+            document.getElementById('profile-email').textContent = currentUser.email || 'user@example.com';
+            document.getElementById('profile-created').textContent = 
+                currentUser.created_at ? currentUser.created_at.split('T')[0] : '2024-01-01';
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(word => word[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        function loadUserData() {
+            // Load from localStorage
+            const savedData = localStorage.getItem(`cineSoulData_${currentUser.username}`);
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    watchlist = data.watchlist || [];
+                    userRatings = data.userRatings || {};
+                    console.log('User data loaded, watchlist count:', watchlist.length);
+                    console.log('User ratings loaded:', Object.keys(userRatings).length);
+                } catch (e) {
+                    console.error('Error loading user data:', e);
+                }
+            }
+        }
+
+        function saveUserData() {
+            const savedData = localStorage.getItem(`cineSoulData_${currentUser.username}`);
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    data.watchlist = watchlist;
+                    data.userRatings = userRatings;
+                    localStorage.setItem(`cineSoulData_${currentUser.username}`, JSON.stringify(data));
+                } catch (e) {
+                    console.error('Error saving user data:', e);
+                }
+            }
+        }
+
+        // ========== MOVIE DETAILS LOADING ==========
+        async function loadMovieDetails() {
+            try {
+                // Load movie details, credits, and similar movies in parallel
+                const [movieDetails, credits, similarMovies] = await Promise.all([
+                    fetchMovieDetails(currentMovieId),
+                    fetchMovieCredits(currentMovieId),
+                    fetchSimilarMovies(currentMovieId)
+                ]);
+                
+                currentMovie = movieDetails;
+                
+                // Display all sections
+                displayMovieHero(movieDetails);
+                displayUserRatingSection(movieDetails);
+                displayMovieOverview(movieDetails);
+                displayCastCrew(credits);
+                displaySimilarMovies(similarMovies);
+                
+                // Track this view
+                trackMovieView(movieDetails);
+                
+            } catch (error) {
+                console.error('Error loading movie details:', error);
+                showErrorState();
+            }
+        }
+
+        async function fetchMovieDetails(movieId) {
+            try {
+                const url = `${TMDB_BASE_URL}/movie/${movieId}?api_key=${getCurrentApiKey()}&append_to_response=videos`;
+                const response = await fetchWithRetry(url);
+                const data = await response.json();
+                
+                return {
+                    id: data.id,
+                    title: data.title,
+                    overview: data.overview,
+                    poster_path: data.poster_path,
+                    backdrop_path: data.backdrop_path,
+                    release_date: data.release_date,
+                    runtime: data.runtime,
+                    vote_average: data.vote_average,
+                    vote_count: data.vote_count,
+                    genres: data.genres,
+                    budget: data.budget,
+                    revenue: data.revenue,
+                    status: data.status,
+                    tagline: data.tagline,
+                    videos: data.videos?.results || [],
+                    production_companies: data.production_companies || [],
+                    spoken_languages: data.spoken_languages || [],
+                    original_language: data.original_language
+                };
+                
+            } catch (error) {
+                console.error('Error fetching movie details:', error);
+                throw error;
+            }
+        }
+
+        async function fetchMovieCredits(movieId) {
+            try {
+                const url = `${TMDB_BASE_URL}/movie/${movieId}/credits?api_key=${getCurrentApiKey()}`;
+                const response = await fetchWithRetry(url);
+                const data = await response.json();
+                
+                return {
+                    cast: data.cast?.slice(0, 12) || [], // Top 12 cast members
+                    crew: data.crew?.filter(person => 
+                        ['Director', 'Producer', 'Writer', 'Screenplay'].includes(person.job)
+                    ).slice(0, 6) || [] // Important crew members
+                };
+                
+            } catch (error) {
+                console.error('Error fetching movie credits:', error);
+                throw error;
+            }
+        }
+
+        // ========== SIMILAR MOVIES (UPDATED) ==========
+        async function fetchSimilarMovies(movieId) {
+            try {
+                // First, get the current movie details to understand its characteristics
+                const movieDetails = await fetchMovieDetails(movieId);
+                const credits = await fetchMovieCredits(movieId);
+                
+                // Extract important characteristics
+                const originalLanguage = movieDetails.original_language;
+                const releaseYear = movieDetails.release_date ? movieDetails.release_date.split('-')[0] : null;
+                const genres = movieDetails.genres.map(g => g.id);
+                const topCastIds = credits.cast.slice(0, 3).map(person => person.id);
+                const director = credits.crew.find(person => person.job === 'Director');
+                const directorId = director ? director.id : null;
+                
+                // Create multiple search queries with different priorities
+                let similarMovies = [];
+                
+                // Priority 1: Same language + same lead actor + same year range (±3 years)
+                if (originalLanguage && topCastIds.length > 0) {
+                    const query1 = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+                    const query1Params = new URLSearchParams({
+                        with_original_language: originalLanguage,
+                        with_cast: topCastIds[0], // Top billed actor
+                        primary_release_year: releaseYear,
+                        with_genres: genres.join('|'),
+                        'vote_average.gte': 5.0,
+                        'vote_count.gte': 100
+                    });
+                    
+                    const response1 = await fetchWithRetry(`${query1}&${query1Params}`);
+                    const data1 = await response1.json();
+                    if (data1.results) {
+                        // Boost relevance score for these matches
+                        data1.results.forEach(movie => {
+                            movie._relevanceScore = 100; // Highest priority
+                            movie._matchReason = 'Same language, lead actor, and year';
+                        });
+                        similarMovies = similarMovies.concat(data1.results.slice(0, 10));
+                    }
+                }
+                
+                // Priority 2: Same language + same director + same genre
+                if (originalLanguage && directorId) {
+                    const query2 = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+                    const query2Params = new URLSearchParams({
+                        with_original_language: originalLanguage,
+                        with_people: directorId,
+                        with_genres: genres.join('|'),
+                        'vote_average.gte': 4.5,
+                        'vote_count.gte': 50
+                    });
+                    
+                    const response2 = await fetchWithRetry(`${query2}&${query2Params}`);
+                    const data2 = await response2.json();
+                    if (data2.results) {
+                        // Add with high relevance score
+                        data2.results.forEach(movie => {
+                            if (!similarMovies.find(m => m.id === movie.id)) {
+                                movie._relevanceScore = 90;
+                                movie._matchReason = 'Same language and director';
+                                similarMovies.push(movie);
+                            }
+                        });
+                    }
+                }
+                
+                // Priority 3: Same language + same genre + year range (±5 years)
+                if (originalLanguage && genres.length > 0) {
+                    const query3 = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+                    const query3Params = new URLSearchParams({
+                        with_original_language: originalLanguage,
+                        with_genres: genres.join('|'),
+                        'vote_average.gte': 4.0,
+                        'vote_count.gte': 20
+                    });
+                    
+                    if (releaseYear) {
+                        const year = parseInt(releaseYear);
+                        query3Params.set('primary_release_date.gte', `${year-5}-01-01`);
+                        query3Params.set('primary_release_date.lte', `${year+5}-12-31`);
+                    }
+                    
+                    const response3 = await fetchWithRetry(`${query3}&${query3Params}`);
+                    const data3 = await response3.json();
+                    if (data3.results) {
+                        // Add with medium relevance score
+                        data3.results.forEach(movie => {
+                            if (!similarMovies.find(m => m.id === movie.id)) {
+                                movie._relevanceScore = 80;
+                                movie._matchReason = 'Same language and genre';
+                                similarMovies.push(movie);
+                            }
+                        });
+                    }
+                }
+                
+                // Priority 4: Same actors (any language) + similar year
+                if (topCastIds.length > 0) {
+                    const query4 = `${TMDB_BASE_URL}/discover/movie?api_key=${getCurrentApiKey()}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
+                    const query4Params = new URLSearchParams({
+                        with_cast: topCastIds.join('|'),
+                        'vote_average.gte': 3.5,
+                        'vote_count.gte': 10
+                    });
+                    
+                    if (releaseYear) {
+                        const year = parseInt(releaseYear);
+                        query4Params.set('primary_release_date.gte', `${year-3}-01-01`);
+                        query4Params.set('primary_release_date.lte', `${year+3}-12-31`);
+                    }
+                    
+                    const response4 = await fetchWithRetry(`${query4}&${query4Params}`);
+                    const data4 = await response4.json();
+                    if (data4.results) {
+                        // Add with lower relevance score (language mismatch)
+                        data4.results.forEach(movie => {
+                            if (!similarMovies.find(m => m.id === movie.id)) {
+                                const langMatch = movie.original_language === originalLanguage;
+                                movie._relevanceScore = langMatch ? 70 : 60;
+                                movie._matchReason = langMatch ? 'Same actors and language' : 'Same actors';
+                                similarMovies.push(movie);
+                            }
+                        });
+                    }
+                }
+                
+                // Remove duplicates and sort by relevance score
+                const uniqueMovies = [];
+                const seenIds = new Set();
+                
+                similarMovies.forEach(movie => {
+                    if (!seenIds.has(movie.id) && movie.id !== movieId) {
+                        seenIds.add(movie.id);
+                        uniqueMovies.push(movie);
+                    }
+                });
+                
+                // Sort by relevance score (descending)
+                uniqueMovies.sort((a, b) => {
+                    // Movies with same language get priority
+                    const aLangMatch = a.original_language === originalLanguage ? 10 : 0;
+                    const bLangMatch = b.original_language === originalLanguage ? 10 : 0;
+                    
+                    // Calculate year proximity score
+                    const aYear = a.release_date ? parseInt(a.release_date.split('-')[0]) : 0;
+                    const bYear = b.release_date ? parseInt(b.release_date.split('-')[0]) : 0;
+                    const targetYear = releaseYear ? parseInt(releaseYear) : 0;
+                    
+                    const aYearScore = targetYear ? 5 - Math.min(Math.abs(aYear - targetYear), 5) : 0;
+                    const bYearScore = targetYear ? 5 - Math.min(Math.abs(bYear - targetYear), 5) : 0;
+                    
+                    // Total score calculation
+                    const aScore = (a._relevanceScore || 0) + aLangMatch + aYearScore;
+                    const bScore = (b._relevanceScore || 0) + bLangMatch + bYearScore;
+                    
+                    return bScore - aScore;
+                });
+                
+                // Get additional details for the top movies
+                const topMovies = uniqueMovies.slice(0, 20);
+                const detailedMovies = await Promise.all(
+                    topMovies.map(async (movie) => {
+                        try {
+                            const details = await fetchMovieDetails(movie.id);
+                            return {
+                                ...movie,
+                                genres: details.genres,
+                                runtime: details.runtime,
+                                vote_average: details.vote_average,
+                                vote_count: details.vote_count
+                            };
+                        } catch (error) {
+                            return movie; // Return basic info if details fail
+                        }
+                    })
+                );
+                
+                return detailedMovies;
+                
+            } catch (error) {
+                console.error('Error fetching similar movies:', error);
+                
+                // Fallback to TMDB's similar endpoint if our advanced query fails
+                try {
+                    const url = `${TMDB_BASE_URL}/movie/${movieId}/similar?api_key=${getCurrentApiKey()}&page=1`;
+                    const response = await fetchWithRetry(url);
+                    const data = await response.json();
+                    
+                    // Still try to prioritize by language
+                    const movieDetails = await fetchMovieDetails(movieId);
+                    const originalLanguage = movieDetails.original_language;
+                    
+                    if (data.results && originalLanguage) {
+                        // Separate movies by language match
+                        const languageMatches = [];
+                        const otherMovies = [];
+                        
+                        data.results.forEach(movie => {
+                            if (movie.original_language === originalLanguage) {
+                                movie._matchReason = 'Same language';
+                                languageMatches.push(movie);
+                            } else {
+                                movie._matchReason = 'Similar content';
+                                otherMovies.push(movie);
+                            }
+                        });
+                        
+                        return [...languageMatches, ...otherMovies].slice(0, 20);
+                    }
+                    
+                    return data.results?.slice(0, 20) || [];
+                    
+                } catch (fallbackError) {
+                    console.error('Fallback similar movies also failed:', fallbackError);
+                    return [];
+                }
+            }
+        }
+
+        // ========== DISPLAY FUNCTIONS ==========
+        function displayMovieHero(movie) {
+            const heroSection = document.getElementById('movie-hero');
+            const isInWatchlist = watchlist.some(m => m.id === movie.id);
+            const year = movie.release_date ? movie.release_date.split('-')[0] : 'N/A';
+            
+            heroSection.innerHTML = `
+                <div class="movie-poster-large">
+                    <img src="${movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : FALLBACK_IMAGE}" 
+                         alt="${movie.title}"
+                         onerror="this.src='${FALLBACK_IMAGE}'">
+                </div>
+                <div class="movie-info">
+                    <h1 class="movie-title">${movie.title}</h1>
+                    <div class="movie-meta">
+                        <div class="movie-rating">
+                            <i class="fas fa-star" style="color: #FFD700;"></i>
+                            <span>${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}/10</span>
+                            <span style="color: #8a8fa3; margin-left: 5px;">(${movie.vote_count || 0} votes)</span>
+                        </div>
+                        <span>•</span>
+                        <span>${year}</span>
+                        <span>•</span>
+                        <span>${movie.runtime || 'N/A'} min</span>
+                        <span>•</span>
+                        <span style="color: #05d9e8;">${movie.original_language ? movie.original_language.toUpperCase() : 'N/A'}</span>
+                    </div>
+                    
+                    <div class="movie-genres">
+                        ${movie.genres?.map(genre => 
+                            `<span class="genre-tag">${genre.name}</span>`
+                        ).join('') || ''}
+                    </div>
+                    
+                    ${movie.tagline ? `
+                    <div style="font-style: italic; color: #05d9e8; margin-top: 10px;">
+                        "${movie.tagline}"
+                    </div>
+                    ` : ''}
+                    
+                    <div class="movie-actions">
+                        <button class="action-btn primary" onclick="playTrailer(${movie.id}, '${movie.title.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-play"></i> Watch Trailer
+                        </button>
+                        <button class="action-btn watchlist-btn ${isInWatchlist ? 'active' : ''}" 
+                                onclick="toggleWatchlist(${movie.id})">
+                            <i class="${isInWatchlist ? 'fas' : 'far'} fa-bookmark"></i> 
+                            ${isInWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+                        </button>
+                        <button class="action-btn" onclick="shareMovie('${movie.title}', ${movie.id})">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayUserRatingSection(movie) {
+            const ratingSection = document.getElementById('user-rating-section');
+            const userRating = userRatings[movie.id] || 0;
+            
+            ratingSection.innerHTML = `
+                <h2 class="section-title"><i class="fas fa-star"></i> Your Rating</h2>
+                <div class="rating-container">
+                    <div class="star-rating" id="star-rating">
+                        ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(star => `
+                            <div class="star ${star <= userRating ? 'active' : ''}" 
+                                 data-rating="${star}"
+                                 onclick="rateMovie(${movie.id}, ${star})">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div>
+                        <div class="rating-text" id="rating-text">
+                            ${userRating > 0 ? `You rated: ${userRating}/10` : 'Rate this movie'}
+                        </div>
+                        <div class="rating-count">
+                            ${movie.vote_count ? `${movie.vote_count.toLocaleString()} total ratings` : 'No ratings yet'}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayMovieOverview(movie) {
+            const overviewSection = document.getElementById('movie-overview');
+            const year = movie.release_date ? movie.release_date.split('-')[0] : 'N/A';
+            const budget = movie.budget ? `$${(movie.budget / 1000000).toFixed(1)}M` : 'N/A';
+            const revenue = movie.revenue ? `$${(movie.revenue / 1000000).toFixed(1)}M` : 'N/A';
+            const languages = movie.spoken_languages?.map(lang => lang.english_name).join(', ') || 'N/A';
+            const companies = movie.production_companies?.map(comp => comp.name).join(', ') || 'N/A';
+            
+            overviewSection.innerHTML = `
+                <h2 class="section-title"><i class="fas fa-info-circle"></i> Overview</h2>
+                <div class="overview-text">
+                    ${movie.overview || 'No overview available.'}
+                </div>
+                
+                <div class="movie-details-grid">
+                    <div class="detail-item">
+                        <div class="detail-label">Release Date</div>
+                        <div class="detail-value">${movie.release_date || 'N/A'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Runtime</div>
+                        <div class="detail-value">${movie.runtime || 'N/A'} minutes</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Status</div>
+                        <div class="detail-value">${movie.status || 'N/A'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Budget</div>
+                        <div class="detail-value">${budget}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Revenue</div>
+                        <div class="detail-value">${revenue}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Original Language</div>
+                        <div class="detail-value">${movie.original_language ? movie.original_language.toUpperCase() : 'N/A'}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Spoken Languages</div>
+                        <div class="detail-value">${languages}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Production Companies</div>
+                        <div class="detail-value">${companies}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayCastCrew(credits) {
+            const castSection = document.getElementById('cast-crew-section');
+            
+            let castHTML = `
+                <h2 class="section-title"><i class="fas fa-users"></i> Cast</h2>
+                <div class="cast-grid">
+            `;
+            
+            if (credits.cast.length > 0) {
+                credits.cast.forEach(person => {
+                    castHTML += `
+                        <div class="cast-card">
+                            <img src="${person.profile_path ? TMDB_IMAGE_BASE + person.profile_path : FALLBACK_CAST_IMAGE}" 
+                                 alt="${person.name}"
+                                 class="cast-photo"
+                                 onerror="this.src='${FALLBACK_CAST_IMAGE}'">
+                            <div class="cast-info">
+                                <div class="cast-name">${person.name}</div>
+                                <div class="cast-character">${person.character || 'Unknown'}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                castHTML += `<div style="grid-column: 1/-1; text-align: center; color: #8a8fa3; padding: 2rem;">No cast information available.</div>`;
+            }
+            
+            castHTML += `</div>`;
+            
+            // Add crew section if available
+            if (credits.crew.length > 0) {
+                castHTML += `
+                    <h2 class="section-title" style="margin-top: 3rem;"><i class="fas fa-film"></i> Crew</h2>
+                    <div class="cast-grid">
+                `;
+                
+                credits.crew.forEach(person => {
+                    castHTML += `
+                        <div class="cast-card">
+                            <img src="${person.profile_path ? TMDB_IMAGE_BASE + person.profile_path : FALLBACK_CAST_IMAGE}" 
+                                 alt="${person.name}"
+                                 class="cast-photo"
+                                 onerror="this.src='${FALLBACK_CAST_IMAGE}'">
+                            <div class="cast-info">
+                                <div class="cast-name">${person.name}</div>
+                                <div class="cast-character">${person.job || 'Unknown'}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                castHTML += `</div>`;
+            }
+            
+            castSection.innerHTML = castHTML;
+        }
+
+        function displaySimilarMovies(movies) {
+            const similarSection = document.getElementById('similar-movies-section');
+            
+            let similarHTML = `
+                <h2 class="section-title"><i class="fas fa-film"></i> Similar Movies (by Language, Actors & Year)</h2>
+                <div class="movies-grid">
+            `;
+            
+            if (movies.length > 0) {
+                movies.forEach(movie => {
+                    const isInWatchlist = watchlist.some(m => m.id === movie.id);
+                    const userRating = userRatings[movie.id] || 0;
+                    const year = movie.release_date ? movie.release_date.split('-')[0] : 'N/A';
+                    const lang = movie.original_language ? movie.original_language.toUpperCase() : 'N/A';
+                    
+                    // Check if language matches current movie
+                    const langMatch = currentMovie && 
+                                     movie.original_language === currentMovie.original_language;
+                    
+                    similarHTML += `
+                        <div class="movie-card" data-movie-id="${movie.id}">
+                            ${langMatch ? `
+                            <div class="language-badge">
+                                <i class="fas fa-language"></i> ${lang}
+                            </div>
+                            ` : ''}
+                            
+                            <img src="${movie.poster_path ? TMDB_IMAGE_BASE + movie.poster_path : FALLBACK_IMAGE}" 
+                                 alt="${movie.title}"
+                                 class="movie-poster"
+                                 onerror="this.src='${FALLBACK_IMAGE}'">
+                            <div class="movie-card-info">
+                                <h3 class="movie-card-title" title="${movie.title}">${movie.title}</h3>
+                                <div class="movie-card-details">
+                                    <span class="movie-year">${year}</span>
+                                    <span>⭐ ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}</span>
+                                    ${userRating > 0 ? `<span style="color: #ff2a6d;">★ ${userRating}/10</span>` : ''}
+                                    ${!langMatch ? `<span style="color: #8a8fa3; font-size: 0.8rem;">${lang}</span>` : ''}
+                                </div>
+                                <div class="movie-card-actions">
+                                    <button class="action-btn" 
+                                            onclick="goToMovieDetail(${movie.id})"
+                                            title="View details">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                    <button class="action-btn" 
+                                            onclick="event.stopPropagation(); playTrailer(${movie.id}, '${movie.title.replace(/'/g, "\\'")}')"
+                                            title="Watch trailer">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button class="action-btn watchlist-btn ${isInWatchlist ? 'active' : ''}" 
+                                            onclick="event.stopPropagation(); toggleWatchlist(${movie.id})"
+                                            title="${isInWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}">
+                                        <i class="${isInWatchlist ? 'fas' : 'far'} fa-bookmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                similarHTML += `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #8a8fa3;">
+                        <i class="fas fa-film" style="font-size: 3rem; margin-bottom: 1rem; color: #05d9e8;"></i>
+                        <h3>No similar movies found</h3>
+                        <p>Try searching for movies with similar characteristics</p>
+                    </div>
+                `;
+            }
+            
+            similarHTML += `</div>`;
+            similarSection.innerHTML = similarHTML;
+            
+            // Add click events to movie cards
+            document.querySelectorAll('.movie-card').forEach(card => {
+                const movieId = card.getAttribute('data-movie-id');
+                card.addEventListener('click', (e) => {
+                    if (!e.target.closest('.movie-card-actions')) {
+                        goToMovieDetail(movieId);
+                    }
+                });
+            });
+        }
+
+        function showErrorState() {
+            const heroSection = document.getElementById('movie-hero');
+            heroSection.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #ff2a6d; margin-bottom: 1rem;"></i>
+                    <h2 style="color: #fff; margin-bottom: 1rem;">Unable to Load Movie Details</h2>
+                    <p style="color: #8a8fa3; margin-bottom: 2rem;">Please check your connection and try again.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="action-btn primary" onclick="window.location.reload()">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='/home'">
+                            <i class="fas fa-home"></i> Go Home
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Hide other sections
+            document.getElementById('user-rating-section').innerHTML = '';
+            document.getElementById('movie-overview').innerHTML = '';
+            document.getElementById('cast-crew-section').innerHTML = '';
+            document.getElementById('similar-movies-section').innerHTML = '';
+        }
+
+        // ========== RATING FUNCTIONS ==========
+        function rateMovie(movieId, rating) {
+            userRatings[movieId] = rating;
+            
+            // Update UI
+            const stars = document.querySelectorAll('#star-rating .star');
+            stars.forEach(star => {
+                const starRating = parseInt(star.getAttribute('data-rating'));
+                star.classList.toggle('active', starRating <= rating);
+            });
+            
+            document.getElementById('rating-text').textContent = `You rated: ${rating}/10`;
+            
+            // Save to cache
+            saveUserData();
+            
+            // Show notification
+            const movieTitle = currentMovie?.title || 'This movie';
+            showNotification(`You rated "${movieTitle}" ${rating}/10`, 'success');
+            
+            // Track rating action
+            trackRating(movieId, rating);
+        }
+
+        function trackRating(movieId, rating) {
+            const savedData = localStorage.getItem(`cineSoulData_${currentUser.username}`);
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    
+                    if (!data.userProfile) {
+                        data.userProfile = { viewingHistory: [] };
+                    }
+                    
+                    const ratingEntry = {
+                        movieId: movieId,
+                        title: currentMovie?.title || 'Unknown',
+                        action: 'rating',
+                        rating: rating,
+                        timestamp: new Date().toISOString(),
+                        genres: currentMovie?.genres?.map(g => g.name) || [],
+                        language: currentMovie?.original_language
+                    };
+                    
+                    // Check if already rated
+                    const existingIndex = data.userProfile.viewingHistory.findIndex(
+                        entry => entry.movieId === movieId && entry.action === 'rating'
+                    );
+                    
+                    if (existingIndex === -1) {
+                        data.userProfile.viewingHistory.push(ratingEntry);
+                    } else {
+                        data.userProfile.viewingHistory[existingIndex] = ratingEntry;
+                    }
+                    
+                    localStorage.setItem(`cineSoulData_${currentUser.username}`, JSON.stringify(data));
+                    console.log('Movie rating tracked');
+                    
+                } catch (e) {
+                    console.error('Error tracking rating:', e);
+                }
+            }
+        }
+
+        // ========== TRAILER FUNCTIONS ==========
+        async function playTrailer(movieId, movieTitle) {
+            showNotification('Loading trailer...', 'info');
+            
+            try {
+                const response = await fetchWithRetry(
+                    `${TMDB_BASE_URL}/movie/${movieId}/videos?api_key=${getCurrentApiKey()}&language=en-US`
+                );
+                const data = await response.json();
+                
+                let trailerKey = null;
+                if (data.results && data.results.length > 0) {
+                    const trailer = data.results.find(v => 
+                        v.type === 'Trailer' && v.site === 'YouTube' && v.official === true
+                    ) || data.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+                    
+                    if (trailer) {
+                        trailerKey = trailer.key;
+                    }
+                }
+                
+                if (trailerKey) {
+                    const trailerModal = document.getElementById('trailer-modal');
+                    const trailerVideo = document.getElementById('trailer-video');
+                    const trailerTitle = document.getElementById('trailer-modal-title');
+                    
+                    trailerTitle.textContent = `${movieTitle} - Trailer`;
+                    trailerVideo.src = `https://www.youtube.com/embed/${trailerKey}?autoplay=1&rel=0`;
+                    
+                    trailerModal.style.display = 'flex';
+                    showNotification('Trailer loaded!', 'success');
+                } else {
+                    showNotification('No official trailer found. Searching YouTube...', 'info');
+                    setTimeout(() => {
+                        window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(movieTitle + ' trailer')}`, '_blank');
+                    }, 1000);
+                }
+                
+            } catch (error) {
+                console.error('Error finding trailer:', error);
+                showNotification('Error loading trailer', 'error');
+            }
+        }
+
+        function closeTrailerModal() {
+            const trailerModal = document.getElementById('trailer-modal');
+            const trailerVideo = document.getElementById('trailer-video');
+            
+            trailerVideo.src = '';
+            trailerModal.style.display = 'none';
+        }
+
+        // ========== UTILITY FUNCTIONS ==========
+        function getCurrentApiKey() {
+            return TMDB_API_KEYS[currentApiKeyIndex];
+        }
+
+        async function fetchWithRetry(url, retries = 3) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(url);
+                    
+                    if (response.status === 429) { // Rate limited
+                        currentApiKeyIndex = (currentApiKeyIndex + 1) % TMDB_API_KEYS.length;
+                        url = url.replace(/api_key=[^&]+/, `api_key=${getCurrentApiKey()}`);
+                        await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+                        continue;
+                    }
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+                    
+                    return response;
+                    
+                } catch (error) {
+                    console.error(`Fetch attempt ${i + 1} failed:`, error);
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+                }
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            if (type === 'success') {
+                notification.style.borderColor = '#00B894';
+            } else if (type === 'error') {
+                notification.style.borderColor = '#D63031';
+            } else if (type === 'warning') {
+                notification.style.borderColor = '#FDCB6E';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function goToMovieDetail(movieId) {
+            if (!movieId || movieId === 'undefined' || movieId === 'null') {
+                showNotification('Error: Movie ID not found', 'error');
+                return;
+            }
+            
+            // Save current scroll position before redirecting
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+            
+            // Redirect to movie details page
+            window.location.href = `/movie-details?movie_id=${movieId}`;
+        }
+
+        function goBack() {
+            const referrer = document.referrer;
+            if (referrer && referrer.includes(window.location.hostname)) {
+                window.history.back();
+            } else {
+                window.location.href = '/home';
+            }
+        }
+
+        // ========== WATCHLIST FUNCTIONS ==========
+        function toggleWatchlist(movieId) {
+            // First try to get movie details if we're toggling from similar movies
+            let movieTitle = currentMovie?.title;
+            let movieData = currentMovie;
+            
+            if (!movieData || movieData.id !== movieId) {
+                // We're toggling a similar movie, not the main one
+                movieTitle = document.querySelector(`[data-movie-id="${movieId}"] .movie-card-title`)?.title || 'Movie';
+            }
+            
+            const index = watchlist.findIndex(m => m.id === movieId);
+            
+            if (index === -1) {
+                // Add to watchlist
+                watchlist.push({
+                    id: movieId,
+                    title: movieTitle,
+                    poster: movieData?.poster_path ? TMDB_IMAGE_BASE + movieData.poster_path : FALLBACK_IMAGE,
+                    year: movieData?.release_date ? movieData.release_date.split('-')[0] : 'N/A',
+                    rating: movieData?.vote_average,
+                    added_at: new Date().toISOString()
+                });
+                
+                showNotification(`"${movieTitle}" added to watchlist`, 'success');
+                
+                // Update button states
+                updateWatchlistButtonState(movieId, true);
+                
+            } else {
+                // Remove from watchlist
+                const removed = watchlist.splice(index, 1)[0];
+                showNotification(`"${removed.title}" removed from watchlist`, 'info');
+                
+                // Update button states
+                updateWatchlistButtonState(movieId, false);
+            }
+            
+            saveUserData();
+        }
+
+        function updateWatchlistButtonState(movieId, isInWatchlist) {
+            // Update main movie button
+            if (currentMovie && currentMovie.id === movieId) {
+                const watchlistBtn = document.querySelector('.movie-hero .watchlist-btn');
+                if (watchlistBtn) {
+                    if (isInWatchlist) {
+                        watchlistBtn.classList.add('active');
+                        watchlistBtn.innerHTML = '<i class="fas fa-bookmark"></i> In Watchlist';
+                    } else {
+                        watchlistBtn.classList.remove('active');
+                        watchlistBtn.innerHTML = '<i class="far fa-bookmark"></i> Add to Watchlist';
+                    }
+                }
+            }
+            
+            // Update similar movie buttons
+            const similarWatchlistBtn = document.querySelector(`[data-movie-id="${movieId}"] .watchlist-btn`);
+            if (similarWatchlistBtn) {
+                if (isInWatchlist) {
+                    similarWatchlistBtn.classList.add('active');
+                    similarWatchlistBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
+                    similarWatchlistBtn.title = 'Remove from watchlist';
+                } else {
+                    similarWatchlistBtn.classList.remove('active');
+                    similarWatchlistBtn.innerHTML = '<i class="far fa-bookmark"></i>';
+                    similarWatchlistBtn.title = 'Add to watchlist';
+                }
+            }
+        }
+
+        // ========== SHARE FUNCTION ==========
+        function shareMovie(title, movieId) {
+            const shareUrl = `${window.location.origin}/movie-details?movie_id=${movieId}`;
+            const shareText = `Check out "${title}" on CineSoul!`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: shareText,
+                    url: shareUrl
+                });
+            } else {
+                // Fallback: Copy to clipboard
+                navigator.clipboard.writeText(`${shareText} ${shareUrl}`)
+                    .then(() => showNotification('Link copied to clipboard!', 'success'))
+                    .catch(() => showNotification('Could not copy link', 'error'));
+            }
+        }
+
+        // ========== TRACKING FUNCTION ==========
+        function trackMovieView(movie) {
+            // Load user data
+            const savedData = localStorage.getItem(`cineSoulData_${currentUser.username}`);
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    
+                    // Add to viewing history if not already there
+                    if (!data.userProfile) {
+                        data.userProfile = { viewingHistory: [] };
+                    }
+                    
+                    const historyEntry = {
+                        movieId: movie.id,
+                        title: movie.title,
+                        action: 'view_details',
+                        timestamp: new Date().toISOString(),
+                        genres: movie.genres?.map(g => g.name) || [],
+                        rating: movie.vote_average,
+                        language: movie.original_language
+                    };
+                    
+                    // Check if already in history
+                    const existingIndex = data.userProfile.viewingHistory.findIndex(
+                        entry => entry.movieId === movie.id && entry.action === 'view_details'
+                    );
+                    
+                    if (existingIndex === -1) {
+                        data.userProfile.viewingHistory.push(historyEntry);
+                        localStorage.setItem(`cineSoulData_${currentUser.username}`, JSON.stringify(data));
+                        console.log('Movie view tracked');
+                    }
+                    
+                } catch (e) {
+                    console.error('Error tracking movie view:', e);
+                }
+            }
+        }
+
+        // ========== EVENT LISTENERS ==========
+        function setupEventListeners() {
+            // Search
+            document.getElementById('search-btn').addEventListener('click', performSearch);
+            document.getElementById('search-input').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+            
+            // Close trailer modal when clicking outside
+            document.getElementById('trailer-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeTrailerModal();
+                }
+            });
+            
+            // Close trailer modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeTrailerModal();
+                }
+            });
+        }
+
+        function performSearch() {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) {
+                showNotification('Please enter a search term', 'warning');
+                return;
+            }
+            
+            // Save current movie ID before redirecting
+            sessionStorage.setItem('lastMovieId', currentMovieId);
+            
+            // Redirect to search results
+            window.location.href = `/search-results?q=${encodeURIComponent(query)}`;
+        }
+
+        // ========== PROFILE MODAL FUNCTIONS ==========
+        function toggleProfileModal() {
+            const modal = document.getElementById('profile-modal');
+            
+            // Update profile stats before showing
+            updateProfileStats();
+            
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function updateProfileStats() {
+            // Load complete user data for stats
+            const savedData = localStorage.getItem(`cineSoulData_${currentUser.username}`);
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    
+                    // Movies watched
+                    const watchedCount = data.userProfile?.viewingHistory?.filter(item => 
+                        item.action === 'view_details'
+                    ).length || 0;
+                    
+                    document.getElementById('profile-watched').textContent = watchedCount;
+                    document.getElementById('profile-watchlist').textContent = watchlist.length;
+                    
+                    // Mood analysis (simplified)
+                    if (data.userProfile?.viewingHistory?.length > 0) {
+                        const genreCounts = {};
+                        const languageCounts = {};
+                        
+                        data.userProfile.viewingHistory.forEach(view => {
+                            view.genres?.forEach(genre => {
+                                genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+                            });
+                            
+                            if (view.language) {
+                                languageCounts[view.language] = (languageCounts[view.language] || 0) + 1;
+                            }
+                        });
+                        
+                        const favoriteGenre = Object.entries(genreCounts)
+                            .sort((a, b) => b[1] - a[1])[0];
+                        
+                        const favoriteLanguage = Object.entries(languageCounts)
+                            .sort((a, b) => b[1] - a[1])[0];
+                        
+                        if (favoriteGenre) {
+                            document.getElementById('favorite-genre').textContent = favoriteGenre[0];
+                        }
+                        
+                        if (favoriteLanguage) {
+                            document.getElementById('most-common-mood').textContent = favoriteLanguage[0].toUpperCase();
+                        }
+                    }
+                    
+                } catch (e) {
+                    console.error('Error updating profile stats:', e);
+                }
+            }
+        }
+
+        function logout() {
+            // Save user data
+            saveUserData();
+            
+            // Clear session data
+            localStorage.removeItem('currentUser');
+            sessionStorage.removeItem('cineSoulSession');
+            
+            // Redirect to welcome page
+            window.location.href = '/';
+        }
+
+        // Restore scroll position if coming from another movie detail page
+        window.addEventListener('load', () => {
+            const savedPosition = sessionStorage.getItem('scrollPosition');
+            if (savedPosition) {
+                window.scrollTo(0, parseInt(savedPosition));
+                sessionStorage.removeItem('scrollPosition');
+            }
+            
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
