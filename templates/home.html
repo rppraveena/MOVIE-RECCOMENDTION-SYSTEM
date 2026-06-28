@@ -1488,14 +1488,14 @@
         };
 
         const moodDisplayNames = {
-            'happy': '😊 Happy',
-            'sad': '😢 Sad',
-            'angry': '😠 Angry',
-            'romantic': '❤️ Romantic',
-            'adventurous': '🏞️ Adventurous',
-            'inspired': '💡 Inspired',
-            'horror': '👻 Horror',
-            'all': '🌍 All'
+            'happy': ' Happy',
+            'sad': ' Sad',
+            'angry': ' Angry',
+            'romantic': ' Romantic',
+            'adventurous': ' Adventurous',
+            'inspired': ' Inspired',
+            'horror': ' Horror',
+            'all': ' All'
         };
 
         // Genre names mapping
@@ -1978,7 +1978,7 @@
                     <img src="${movie.poster}" alt="${movie.title}" class="movie-poster" 
                          onerror="this.src='${FALLBACK_IMAGE}'">
                     <div style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 8px; border-radius: 5px; font-size: 0.8rem;">
-                        ⭐ ${movie.rating}
+                         ${movie.rating}
                     </div>
                     ${movie.mood && movie.mood !== 'all' ? `
                     <div style="position: absolute; bottom: 10px; left: 10px; background: ${moodColor}; color: white; padding: 3px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: 600;">
