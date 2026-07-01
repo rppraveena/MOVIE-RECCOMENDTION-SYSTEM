@@ -179,5 +179,5 @@ python app.py
 ## Author
 
 **Praveena R**
-Computer Science and Engineering Student
+B.E.(CSE)
 GitHub: https://github.com/rppraveena
