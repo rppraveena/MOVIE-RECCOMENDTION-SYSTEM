@@ -1,3 +1,12 @@
+<p align="center">
+  <img src="assets/banner.png" alt="CineSoul Banner" width="100%">
+</p>
+
+<h1 align="center">CineSoul – Intelligent Movie Recommendation Platform</h1>
+
+<p align="center">
+  A Flask-based movie recommendation platform featuring mood-based recommendations, intelligent search, AI chatbot assistance, and trailer integration.
+</p>
 # CineSoul – Intelligent Movie Recommendation Platform
 
 CineSoul is a Flask-based web application that helps users discover movies through mood-based recommendations, intelligent search, and an AI-powered chatbot. By integrating multiple movie databases and trailer services, the platform delivers a personalized movie discovery experience with a clean and user-friendly interface.
